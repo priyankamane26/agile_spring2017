@@ -1,0 +1,393 @@
+0 HEAD
+0
+HEAD
+0 @I1@ INDI
+0
+INDI
+1 NAME Priyanka /Mane/
+1
+NAME
+2 GIVN Priyanka
+2
+Invalid Tag
+2 SURN Mane
+2
+Invalid Tag
+2 _MARNM Mane
+2
+Invalid Tag
+1 SEX F
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 26 MAR 1991
+2
+DATE
+1 FAMC @F1@
+1
+FAMC
+0 @I2@ INDI
+0
+INDI
+1 NAME Sachin /Mane/
+1
+NAME
+2 GIVN Sachin
+2
+Invalid Tag
+2 SURN Mane
+2
+Invalid Tag
+2 _MARNM Mane
+2
+Invalid Tag
+1 SEX M
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 31 MAY 1965
+2
+DATE
+1 FAMS @F1@
+1
+FAMS
+0 @I3@ INDI
+0
+INDI
+1 NAME Sheela /Mane/
+1
+NAME
+2 GIVN Sheela
+2
+Invalid Tag
+2 SURN Mane
+2
+Invalid Tag
+2 _MARNM Mane
+2
+Invalid Tag
+1 SEX F
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 2 FEB 1970
+2
+DATE
+1 FAMS @F1@
+1
+FAMS
+1 FAMC @F2@
+1
+FAMC
+0 @I4@ INDI
+0
+INDI
+1 NAME Pratik /Mane/
+1
+NAME
+2 GIVN Pratik
+2
+Invalid Tag
+2 SURN Mane
+2
+Invalid Tag
+2 _MARNM Mane
+2
+Invalid Tag
+1 SEX M
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 28 NOV 1995
+2
+DATE
+1 FAMC @F1@
+1
+FAMC
+0 @I5@ INDI
+0
+INDI
+1 NAME Sham /Sawant/
+1
+NAME
+2 GIVN Sham
+2
+Invalid Tag
+2 SURN Sawant
+2
+Invalid Tag
+2 _MARNM Sawant
+2
+Invalid Tag
+1 SEX M
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 6 JAN 1930
+2
+DATE
+1 FAMS @F2@
+1
+FAMS
+1 FAMS @F4@
+1
+FAMS
+0 @I6@ INDI
+0
+INDI
+1 NAME Kumud /Sawant/
+1
+NAME
+2 GIVN Kumud
+2
+Invalid Tag
+2 SURN Sawant
+2
+Invalid Tag
+2 _MARNM Sawant
+2
+Invalid Tag
+1 SEX F
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 13 APR 1942
+2
+DATE
+1 FAMS @F2@
+1
+FAMS
+0 @I7@ INDI
+0
+INDI
+1 NAME Shankar /Sawant/
+1
+NAME
+2 GIVN Shankar
+2
+Invalid Tag
+2 SURN Sawant
+2
+Invalid Tag
+2 _MARNM Sawant
+2
+Invalid Tag
+1 SEX M
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 5 SEP 1954
+2
+DATE
+1 FAMS @F3@
+1
+FAMS
+1 FAMS @F5@
+1
+FAMS
+1 FAMC @F4@
+1
+FAMC
+0 @I8@ INDI
+0
+INDI
+1 NAME Suman /Bane/
+1
+NAME
+2 GIVN Suman
+2
+Invalid Tag
+2 SURN Bane
+2
+Invalid Tag
+2 _MARNM Bane
+2
+Invalid Tag
+1 SEX F
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 2 OCT 1933
+2
+DATE
+1 DEAT Y
+1
+DEAT
+2 DATE 16 JUN 1956
+2
+DATE
+1 FAMS @F4@
+1
+FAMS
+0 @I9@ INDI
+0
+INDI
+1 NAME Sujata /Sawant/
+1
+NAME
+2 GIVN Sujata
+2
+Invalid Tag
+2 SURN Sawant
+2
+Invalid Tag
+2 _MARNM Sawant
+2
+Invalid Tag
+1 SEX F
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 2 JUN 1972
+2
+DATE
+1 FAMC @F4@
+1
+FAMC
+0 @I10@ INDI
+0
+INDI
+1 NAME Sagar /Sawant/
+1
+NAME
+2 GIVN Sagar
+2
+Invalid Tag
+2 SURN Sawant
+2
+Invalid Tag
+2 _MARNM Sawant
+2
+Invalid Tag
+1 SEX M
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 20 JUN 1993
+2
+DATE
+1 FAMC @F5@
+1
+FAMC
+0 @I11@ INDI
+0
+INDI
+1 NAME Kirti /Johnson/
+1
+NAME
+2 GIVN Kirti
+2
+Invalid Tag
+2 SURN Johnson
+2
+Invalid Tag
+2 _MARNM Johnson
+2
+Invalid Tag
+1 SEX F
+1
+SEX
+1 BIRT
+1
+BIRT
+2 DATE 5 SEP 1957
+2
+DATE
+1 FAMS @F3@
+1
+FAMS
+0 @F1@ FAM
+0
+FAM
+1 HUSB @I2@
+1
+HUSB
+1 WIFE @I3@
+1
+WIFE
+1 CHIL @I1@
+1
+CHIL
+1 CHIL @I4@
+1
+CHIL
+1 _CURRENT Y
+1
+Invalid Tag
+0 @F2@ FAM
+0
+FAM
+1 HUSB @I5@
+1
+HUSB
+1 WIFE @I6@
+1
+WIFE
+1 CHIL @I3@
+1
+CHIL
+1 _CURRENT Y
+1
+Invalid Tag
+0 @F4@ FAM
+0
+FAM
+1 HUSB @I5@
+1
+HUSB
+1 WIFE @I8@
+1
+WIFE
+1 CHIL @I7@
+1
+CHIL
+1 CHIL @I9@
+1
+CHIL
+1 _CURRENT N
+1
+Invalid Tag
+0 @F3@ FAM
+0
+FAM
+1 HUSB @I7@
+1
+HUSB
+1 WIFE @I11@
+1
+WIFE
+1 _CURRENT N
+1
+Invalid Tag
+0 @F5@ FAM
+0
+FAM
+1 HUSB @I7@
+1
+HUSB
+1 CHIL @I10@
+1
+CHIL
+0 TRLR
+0
+TRLR

@@ -1,0 +1,1610 @@
+Line: 0 HEAD
+Level: 0
+Tag: HEAD
+
+Argument: 
+
+Line: 0 @I1@ INDI
+Level: 0
+Tag: INDI
+
+Argument: 
+
+Line: 1 NAME Priyanka /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Priyanka
+
+Line: 2 GIVN Priyanka
+Level: 2
+Tag: GIVN
+
+Argument: Priyanka
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 26 MAR 1991
+Level: 2
+Tag: DATE
+
+Argument: 26
+
+Line: 1 FAMC @F1@
+Level: 1
+Tag: FAMC
+
+Argument: @F1@
+
+Line: 0 @I2@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F1@
+
+Line: 1 NAME Sachin /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Sachin
+
+Line: 2 GIVN Sachin
+Level: 2
+Tag: GIVN
+
+Argument: Sachin
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 31 MAY 1965
+Level: 2
+Tag: DATE
+
+Argument: 31
+
+Line: 1 FAMS @F1@
+Level: 1
+Tag: FAMS
+
+Argument: @F1@
+
+Line: 0 @I3@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F1@
+
+Line: 1 NAME Sheela /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Sheela
+
+Line: 2 GIVN Sheela
+Level: 2
+Tag: GIVN
+
+Argument: Sheela
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 2 FEB 1970
+Level: 2
+Tag: DATE
+
+Argument: 2
+
+Line: 1 FAMS @F1@
+Level: 1
+Tag: FAMS
+
+Argument: @F1@
+
+Line: 1 FAMC @F2@
+Level: 1
+Tag: FAMC
+
+Argument: @F2@
+
+Line: 0 @I4@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F2@
+
+Line: 1 NAME Pratik /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Pratik
+
+Line: 2 GIVN Pratik
+Level: 2
+Tag: GIVN
+
+Argument: Pratik
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 28 NOV 1995
+Level: 2
+Tag: DATE
+
+Argument: 28
+
+Line: 1 FAMC @F1@
+Level: 1
+Tag: FAMC
+
+Argument: @F1@
+
+Line: 0 @I5@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F1@
+
+Line: 1 NAME Sham /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Sham
+
+Line: 2 GIVN Sham
+Level: 2
+Tag: GIVN
+
+Argument: Sham
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 6 JAN 1930
+Level: 2
+Tag: DATE
+
+Argument: 6
+
+Line: 1 FAMS @F2@
+Level: 1
+Tag: FAMS
+
+Argument: @F2@
+
+Line: 1 FAMS @F4@
+Level: 1
+Tag: FAMS
+
+Argument: @F4@
+
+Line: 0 @I6@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Kumud /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Kumud
+
+Line: 2 GIVN Kumud
+Level: 2
+Tag: GIVN
+
+Argument: Kumud
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 13 APR 1942
+Level: 2
+Tag: DATE
+
+Argument: 13
+
+Line: 1 FAMS @F2@
+Level: 1
+Tag: FAMS
+
+Argument: @F2@
+
+Line: 0 @I7@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F2@
+
+Line: 1 NAME Shankar /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Shankar
+
+Line: 2 GIVN Shankar
+Level: 2
+Tag: GIVN
+
+Argument: Shankar
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 5 SEP 1954
+Level: 2
+Tag: DATE
+
+Argument: 5
+
+Line: 1 FAMS @F3@
+Level: 1
+Tag: FAMS
+
+Argument: @F3@
+
+Line: 1 FAMS @F5@
+Level: 1
+Tag: FAMS
+
+Argument: @F5@
+
+Line: 1 FAMC @F4@
+Level: 1
+Tag: FAMC
+
+Argument: @F4@
+
+Line: 0 @I8@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Suman /Bane/
+Level: 1
+Tag: NAME
+
+Argument: Suman
+
+Line: 2 GIVN Suman
+Level: 2
+Tag: GIVN
+
+Argument: Suman
+
+Line: 2 SURN Bane
+Level: 2
+Tag: SURN
+
+Argument: Bane
+
+Line: 2 _MARNM Bane
+Level: 2
+Tag: _MARNM
+
+Argument: Bane
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 2 OCT 1933
+Level: 2
+Tag: DATE
+
+Argument: 2
+
+Line: 1 DEAT Y
+Level: 1
+Tag: DEAT
+
+Argument: Y
+
+Line: 2 DATE 16 JUN 1956
+Level: 2
+Tag: DATE
+
+Argument: 16
+
+Line: 1 FAMS @F4@
+Level: 1
+Tag: FAMS
+
+Argument: @F4@
+
+Line: 0 @I9@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Sujata /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Sujata
+
+Line: 2 GIVN Sujata
+Level: 2
+Tag: GIVN
+
+Argument: Sujata
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 2 JUN 1972
+Level: 2
+Tag: DATE
+
+Argument: 2
+
+Line: 1 FAMC @F4@
+Level: 1
+Tag: FAMC
+
+Argument: @F4@
+
+Line: 0 @I10@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Sagar /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Sagar
+
+Line: 2 GIVN Sagar
+Level: 2
+Tag: GIVN
+
+Argument: Sagar
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 20 JUN 1993
+Level: 2
+Tag: DATE
+
+Argument: 20
+
+Line: 1 FAMC @F5@
+Level: 1
+Tag: FAMC
+
+Argument: @F5@
+
+Line: 0 @I11@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F5@
+
+Line: 1 NAME Kirti /Johnson/
+Level: 1
+Tag: NAME
+
+Argument: Kirti
+
+Line: 2 GIVN Kirti
+Level: 2
+Tag: GIVN
+
+Argument: Kirti
+
+Line: 2 SURN Johnson
+Level: 2
+Tag: SURN
+
+Argument: Johnson
+
+Line: 2 _MARNM Johnson
+Level: 2
+Tag: _MARNM
+
+Argument: Johnson
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 5 SEP 1957
+Level: 2
+Tag: DATE
+
+Argument: 5
+
+Line: 1 FAMS @F3@
+Level: 1
+Tag: FAMS
+
+Argument: @F3@
+
+Line: 0 @F1@ FAM
+Level: 0
+Tag: FAM
+
+Argument: @F3@
+
+Line: 1 HUSB @I2@
+Level: 1
+Tag: HUSB
+
+Argument: @I2@
+
+Line: 1 WIFE @I3@
+Level: 1
+Tag: WIFE
+
+Argument: @I3@
+
+Line: 1 CHIL @I1@
+Level: 1
+Tag: CHIL
+
+Argument: @I1@
+
+Line: 1 CHIL @I4@
+Level: 1
+Tag: CHIL
+
+Argument: @I4@
+
+Line: 1 _CURRENT Y
+Level: 1
+Tag: _CURRENT
+
+Argument: Y
+
+Line: 0 @F2@ FAM
+Level: 0
+Tag: FAM
+
+Argument: Y
+
+Line: 1 HUSB @I5@
+Level: 1
+Tag: HUSB
+
+Argument: @I5@
+
+Line: 1 WIFE @I6@
+Level: 1
+Tag: WIFE
+
+Argument: @I6@
+
+Line: 1 CHIL @I3@
+Level: 1
+Tag: CHIL
+
+Argument: @I3@
+
+Line: 1 _CURRENT Y
+Level: 1
+Tag: _CURRENT
+
+Argument: Y
+
+Line: 0 @F4@ FAM
+Level: 0
+Tag: FAM
+
+Argument: Y
+
+Line: 1 HUSB @I5@
+Level: 1
+Tag: HUSB
+
+Argument: @I5@
+
+Line: 1 WIFE @I8@
+Level: 1
+Tag: WIFE
+
+Argument: @I8@
+
+Line: 1 CHIL @I7@
+Level: 1
+Tag: CHIL
+
+Argument: @I7@
+
+Line: 1 CHIL @I9@
+Level: 1
+Tag: CHIL
+
+Argument: @I9@
+
+Line: 1 _CURRENT N
+Level: 1
+Tag: _CURRENT
+
+Argument: N
+
+Line: 0 @F3@ FAM
+Level: 0
+Tag: FAM
+
+Argument: N
+
+Line: 1 HUSB @I7@
+Level: 1
+Tag: HUSB
+
+Argument: @I7@
+
+Line: 1 WIFE @I11@
+Level: 1
+Tag: WIFE
+
+Argument: @I11@
+
+Line: 1 _CURRENT N
+Level: 1
+Tag: _CURRENT
+
+Argument: N
+
+Line: 0 @F5@ FAM
+Level: 0
+Tag: FAM
+
+Argument: N
+
+Line: 1 HUSB @I7@
+Level: 1
+Tag: HUSB
+
+Argument: @I7@
+
+Line: 1 CHIL @I10@
+Level: 1
+Tag: CHIL
+
+Argument: @I10@
+
+Line: 0 HEAD
+Level: 0
+Tag: HEAD
+
+Argument: 
+
+Line: 0 @I1@ INDI
+Level: 0
+Tag: INDI
+
+Argument: 
+
+Line: 1 NAME Priyanka /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Priyanka
+
+Line: 2 GIVN Priyanka
+Level: 2
+Tag: GIVN
+
+Argument: Priyanka
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 26 MAR 1991
+Level: 2
+Tag: DATE
+
+Argument: 26
+
+Line: 1 FAMC @F1@
+Level: 1
+Tag: FAMC
+
+Argument: @F1@
+
+Line: 0 @I2@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F1@
+
+Line: 1 NAME Sachin /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Sachin
+
+Line: 2 GIVN Sachin
+Level: 2
+Tag: GIVN
+
+Argument: Sachin
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 31 MAY 1965
+Level: 2
+Tag: DATE
+
+Argument: 31
+
+Line: 1 FAMS @F1@
+Level: 1
+Tag: FAMS
+
+Argument: @F1@
+
+Line: 0 @I3@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F1@
+
+Line: 1 NAME Sheela /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Sheela
+
+Line: 2 GIVN Sheela
+Level: 2
+Tag: GIVN
+
+Argument: Sheela
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 2 FEB 1970
+Level: 2
+Tag: DATE
+
+Argument: 2
+
+Line: 1 FAMS @F1@
+Level: 1
+Tag: FAMS
+
+Argument: @F1@
+
+Line: 1 FAMC @F2@
+Level: 1
+Tag: FAMC
+
+Argument: @F2@
+
+Line: 0 @I4@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F2@
+
+Line: 1 NAME Pratik /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Pratik
+
+Line: 2 GIVN Pratik
+Level: 2
+Tag: GIVN
+
+Argument: Pratik
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 28 NOV 1995
+Level: 2
+Tag: DATE
+
+Argument: 28
+
+Line: 1 FAMC @F1@
+Level: 1
+Tag: FAMC
+
+Argument: @F1@
+
+Line: 0 @I5@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F1@
+
+Line: 1 NAME Sham /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Sham
+
+Line: 2 GIVN Sham
+Level: 2
+Tag: GIVN
+
+Argument: Sham
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 6 JAN 1930
+Level: 2
+Tag: DATE
+
+Argument: 6
+
+Line: 1 FAMS @F2@
+Level: 1
+Tag: FAMS
+
+Argument: @F2@
+
+Line: 1 FAMS @F4@
+Level: 1
+Tag: FAMS
+
+Argument: @F4@
+
+Line: 0 @I6@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Kumud /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Kumud
+
+Line: 2 GIVN Kumud
+Level: 2
+Tag: GIVN
+
+Argument: Kumud
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 13 APR 1942
+Level: 2
+Tag: DATE
+
+Argument: 13
+
+Line: 1 FAMS @F2@
+Level: 1
+Tag: FAMS
+
+Argument: @F2@
+
+Line: 0 @I7@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F2@
+
+Line: 1 NAME Shankar /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Shankar
+
+Line: 2 GIVN Shankar
+Level: 2
+Tag: GIVN
+
+Argument: Shankar
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 5 SEP 1954
+Level: 2
+Tag: DATE
+
+Argument: 5
+
+Line: 1 FAMS @F3@
+Level: 1
+Tag: FAMS
+
+Argument: @F3@
+
+Line: 1 FAMS @F5@
+Level: 1
+Tag: FAMS
+
+Argument: @F5@
+
+Line: 1 FAMC @F4@
+Level: 1
+Tag: FAMC
+
+Argument: @F4@
+
+Line: 0 @I8@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Suman /Bane/
+Level: 1
+Tag: NAME
+
+Argument: Suman
+
+Line: 2 GIVN Suman
+Level: 2
+Tag: GIVN
+
+Argument: Suman
+
+Line: 2 SURN Bane
+Level: 2
+Tag: SURN
+
+Argument: Bane
+
+Line: 2 _MARNM Bane
+Level: 2
+Tag: _MARNM
+
+Argument: Bane
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 2 OCT 1933
+Level: 2
+Tag: DATE
+
+Argument: 2
+
+Line: 1 DEAT Y
+Level: 1
+Tag: DEAT
+
+Argument: Y
+
+Line: 2 DATE 16 JUN 1956
+Level: 2
+Tag: DATE
+
+Argument: 16
+
+Line: 1 FAMS @F4@
+Level: 1
+Tag: FAMS
+
+Argument: @F4@
+
+Line: 0 @I9@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Sujata /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Sujata
+
+Line: 2 GIVN Sujata
+Level: 2
+Tag: GIVN
+
+Argument: Sujata
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 2 JUN 1972
+Level: 2
+Tag: DATE
+
+Argument: 2
+
+Line: 1 FAMC @F4@
+Level: 1
+Tag: FAMC
+
+Argument: @F4@
+
+Line: 0 @I10@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F4@
+
+Line: 1 NAME Sagar /Sawant/
+Level: 1
+Tag: NAME
+
+Argument: Sagar
+
+Line: 2 GIVN Sagar
+Level: 2
+Tag: GIVN
+
+Argument: Sagar
+
+Line: 2 SURN Sawant
+Level: 2
+Tag: SURN
+
+Argument: Sawant
+
+Line: 2 _MARNM Sawant
+Level: 2
+Tag: _MARNM
+
+Argument: Sawant
+
+Line: 1 SEX M
+Level: 1
+Tag: SEX
+
+Argument: M
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 20 JUN 1993
+Level: 2
+Tag: DATE
+
+Argument: 20
+
+Line: 1 FAMC @F5@
+Level: 1
+Tag: FAMC
+
+Argument: @F5@
+
+Line: 0 @I11@ INDI
+Level: 0
+Tag: INDI
+
+Argument: @F5@
+
+Line: 1 NAME Kirti /Johnson/
+Level: 1
+Tag: NAME
+
+Argument: Kirti
+
+Line: 2 GIVN Kirti
+Level: 2
+Tag: GIVN
+
+Argument: Kirti
+
+Line: 2 SURN Johnson
+Level: 2
+Tag: SURN
+
+Argument: Johnson
+
+Line: 2 _MARNM Johnson
+Level: 2
+Tag: _MARNM
+
+Argument: Johnson
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 5 SEP 1957
+Level: 2
+Tag: DATE
+
+Argument: 5
+
+Line: 1 FAMS @F3@
+Level: 1
+Tag: FAMS
+
+Argument: @F3@
+
+Line: 0 @F1@ FAM
+Level: 0
+Tag: FAM
+
+Argument: @F3@
+
+Line: 1 HUSB @I2@
+Level: 1
+Tag: HUSB
+
+Argument: @I2@
+
+Line: 1 WIFE @I3@
+Level: 1
+Tag: WIFE
+
+Argument: @I3@
+
+Line: 1 CHIL @I1@
+Level: 1
+Tag: CHIL
+
+Argument: @I1@
+
+Line: 1 CHIL @I4@
+Level: 1
+Tag: CHIL
+
+Argument: @I4@
+
+Line: 1 _CURRENT Y
+Level: 1
+Tag: _CURRENT
+
+Argument: Y
+
+Line: 0 @F2@ FAM
+Level: 0
+Tag: FAM
+
+Argument: Y
+
+Line: 1 HUSB @I5@
+Level: 1
+Tag: HUSB
+
+Argument: @I5@
+
+Line: 1 WIFE @I6@
+Level: 1
+Tag: WIFE
+
+Argument: @I6@
+
+Line: 1 CHIL @I3@
+Level: 1
+Tag: CHIL
+
+Argument: @I3@
+
+Line: 1 _CURRENT Y
+Level: 1
+Tag: _CURRENT
+
+Argument: Y
+
+Line: 0 @F4@ FAM
+Level: 0
+Tag: FAM
+
+Argument: Y
+
+Line: 1 HUSB @I5@
+Level: 1
+Tag: HUSB
+
+Argument: @I5@
+
+Line: 1 WIFE @I8@
+Level: 1
+Tag: WIFE
+
+Argument: @I8@
+
+Line: 1 CHIL @I7@
+Level: 1
+Tag: CHIL
+
+Argument: @I7@
+
+Line: 1 CHIL @I9@
+Level: 1
+Tag: CHIL
+
+Argument: @I9@
+
+Line: 1 _CURRENT N
+Level: 1
+Tag: _CURRENT
+
+Argument: N
+
+Line: 0 @F3@ FAM
+Level: 0
+Tag: FAM
+
+Argument: N
+
+Line: 1 HUSB @I7@
+Level: 1
+Tag: HUSB
+
+Argument: @I7@
+
+Line: 1 WIFE @I11@
+Level: 1
+Tag: WIFE
+
+Argument: @I11@
+
+Line: 1 _CURRENT N
+Level: 1
+Tag: _CURRENT
+
+Argument: N
+
+Line: 0 @F5@ FAM
+Level: 0
+Tag: FAM
+
+Argument: N
+
+Line: 1 HUSB @I7@
+Level: 1
+Tag: HUSB
+
+Argument: @I7@
+
+Line: 1 CHIL @I10@
+Level: 1
+Tag: CHIL
+
+Argument: @I10@
+
+Line: 0 HEAD
+Level: 0
+Tag: HEAD
+
+Argument: 
+
+Line: 0 @I1@ INDI
+Level: 0
+Tag: INDI
+
+Argument: 
+
+Line: 1 NAME Priyanka /Mane/
+Level: 1
+Tag: NAME
+
+Argument: Priyanka
+
+Line: 2 GIVN Priyanka
+Level: 2
+Tag: GIVN
+
+Argument: Priyanka
+
+Line: 2 SURN Mane
+Level: 2
+Tag: SURN
+
+Argument: Mane
+
+Line: 2 _MARNM Mane
+Level: 2
+Tag: _MARNM
+
+Argument: Mane
+
+Line: 1 SEX F
+Level: 1
+Tag: SEX
+
+Argument: F
+
+Line: 1 BIRT
+Level: 1
+Tag: BIRT
+
+Line: 2 DATE 26 MAR 1991
+Level: 2
+Tag: DATE
+
+Argument: 26
+
+Line: 1 FAMC @F1@
+Level: 1
+Tag: FAMC
+
+Argument: @F1@
+
+Line: 0 @F1@ FAM
+Level: 0
+Tag: FAM
+
+Argument: @F1@
+
+Line: 1 HUSB @I2@
+Level: 1
+Tag: HUSB
+
+Argument: @I2@
+
+Line: 1 WIFE @I3@
+Level: 1
+Tag: WIFE
+
+Argument: @I3@
+
+Line: 1 CHIL @I1@
+Level: 1
+Tag: CHIL
+
+Argument: @I1@
+
+Line: 1 CHIL @I4@
+Level: 1
+Tag: CHIL
+
+Argument: @I4@
+
+Line: 1 _CURRENT Y
+Level: 1
+Tag: _CURRENT
+
+Argument: Y
+
