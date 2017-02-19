@@ -303,6 +303,8 @@ public static int getAge(Date dateOfBirth) {
     int age = 0;
 
     birthDate.setTime(dateOfBirth);
+    
+    // Code changes after running the test cases - testForInvalidBirthDate
     if (birthDate.after(today)) {
         throw new IllegalArgumentException("Invalid birth date!");
     }
@@ -320,14 +322,17 @@ public static int getAge(Date dateOfBirth) {
         age--;
     }
 
-    return age;
+    // return age;
+    // Code changes after running the test cases - testBirthdayToday
+    if(age==0)
+    {
+    	throw new IllegalArgumentException("Age cannot be zero");
+    }else{
+    	return age;
+    }
+    
 }
 
-// funtion to perfom the user story
-//Logic to check if the person (both husband and wife) is divorced or not after death.
-//	if(isDivorced){
-//		
-//	}
 
 public static void main(String[] args) throws IOException, ParseException {
 	

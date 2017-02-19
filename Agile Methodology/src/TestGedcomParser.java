@@ -18,9 +18,22 @@ public class TestGedcomParser{
 		assertEquals("Not a correct age", age, GedcomParser.getAge(dob));
 	}
 
-	// Testing exception thrown if the birthdate entered is greater than today's date.
-	@Test(expected = IllegalArgumentException.class)
+	/*	
+	// Testing if the birthdate entered is greater than today's date.
+	@Test
 	public void testForInvalidBirthDate(){
+		String birth="26 MAR 2017";
+		@SuppressWarnings("deprecation")
+		Date dob= new Date(birth);
+		
+		assertTrue("Invalid birth date",GedcomParser.getAge(dob)>0);
+	}
+	*/
+	
+	
+	// Testing exception that handled above case when birthdate is greater than today.
+	@Test(expected = IllegalArgumentException.class)
+	public void testExceptionForInvalidBirthDate(){
 		String birth="26 MAR 2017";
 		@SuppressWarnings("deprecation")
 		Date dob= new Date(birth);
@@ -28,14 +41,14 @@ public class TestGedcomParser{
 		GedcomParser.getAge(dob);
 	}
 	
-		/*
-		 *  Exact real age is 1 years 11 months 28 days.
+		
+		/* *  Exact real age is 1 years 11 months 28 days.
 		 *  The function does consider the scenario where the birthdate 
 		 *  is in the same month but the birth DAY is greater than today.
 		 *  
 		 *  Test should fail for age=2, but pass for age=1
-		 *  
-		 */
+		 *  */
+		 
 		@Test
 		public void testSameMonthDifferentDay(){
 			String birth="22 Feb 2015";
@@ -62,18 +75,27 @@ public class TestGedcomParser{
 					assertEquals("Age does not consider leap year", age, GedcomParser.getAge(dob));
 					
 				}
-				
-		// Testing for Zero age or person born today.
+		/*	
+		// Testing for person born today.
 		@Test
-			public void testAgezero(){
+			public void testBirthdayToday(){
 				String birth="19 Feb 2017";
 				@SuppressWarnings("deprecation")
 				Date dob= new Date(birth);
-				//age=0;
-				//int age=1;  
-				assertTrue("Age can not be Zero",GedcomParser.getAge(dob)==0);	
-				//assertEquals("Age cannot be zero", age, GedcomParser.getAge(dob));
-					
-			}	
+				assertTrue("Birthdate and today's date cannot be same",GedcomParser.getAge(dob)==0);
+									
+			}
+		*/		
+				
+		// Testing Exception that handled above zero age case.
+		@Test(expected = IllegalArgumentException.class)
+				public void testAgezero(){
+					String birth="19 Feb 2017";
+					@SuppressWarnings("deprecation")
+					Date dob= new Date(birth);
+					GedcomParser.getAge(dob);	
+									
+				}	
+			
 		
 }
