@@ -12,7 +12,6 @@ version 4
 DB Details
 
 db username - postgresql
-db password - root
 port - 5432
 
 Reuqired jars
