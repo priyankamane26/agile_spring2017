@@ -17,6 +17,16 @@
  * 				 death date, divorce date resp.
  * 				-Logic to get the husband and wife
  * 				 names basis on their INDI ID's
+ * 02/19/2017	-Code changes to handle the cases shown	PM
+ * 				 by junit test cases
+ * 02/21/2017	-Logic developed to get the individuals	PM
+ * 				 who got divorced after death
+ * 02/22/2017	-US06 getDivAfterDeathINDI()			PM
+ * 				 and implemented a simple UI to allow 
+ * 				 User to select from the choices using
+ * 				 JoptionPane
+ * 02/23/2017	-US27 getINDIAge() method to display 	PM 
+ * 				 the individuals with their age		 				 
  ************************************************************				  
  */
 
@@ -26,6 +36,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,6 +44,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.util.Date;
 import java.util.Locale;
 import java.sql.Statement;
@@ -62,7 +76,8 @@ public class GedcomParser {
 // Parsing the GEDCOM file 
 public static void parse() throws IOException, ParseException, SQLException {
     //scan = new Scanner(new FileReader("My-Family-30-Jan-2017-424.ged"));
-    scan = new Scanner(new FileReader("My-Family-29-Jan-2017-377.ged"));
+    //scan = new Scanner(new FileReader("My-Family-29-Jan-2017-377.ged"));
+	scan = new Scanner(new FileReader("US_07.ged"));
     String reader = "";
     int count=0;
     String name="";
@@ -264,6 +279,9 @@ public static void insertINDIData(String name, String id,String surname,String s
 	if(death==null || death==""){
 		alive=true;
 	}
+	else{
+		alive=false;
+	}
 	 
 	 int age=getAge(birthdate);
 	 		 
@@ -285,9 +303,12 @@ public static void insertFAMData(String id, String marr,String div, String husb,
 	if(div==null || div==""){
 		isDivorced=false;
 	}
+	else{
+		isDivorced=true;
+	}
 	
 	
-	String query = "INSERT INTO Families VALUES("+"'"+id+"','"+marr+"','"+isDivorced+"','"+husb+"',NULL,'"+wife+"',NULL,'"+child+"')";
+	String query = "INSERT INTO Families VALUES("+"'"+id+"','"+marr+"','"+isDivorced+"','"+div+"','"+husb+"',NULL,'"+wife+"',NULL,'"+child+"')";
 	//System.out.println(query);
 	stmt.executeUpdate(query);
 	
@@ -333,8 +354,98 @@ public static int getAge(Date dateOfBirth) {
     
 }
 
+public static void getDivAfterDeathINDI() throws SQLException, ParseException{
+	String div="";
+	String death="";
+	String INDIName="";
+	Date divDt=new Date();
+	Date deathDt=new Date();
+	
+	String query ="select to_date(f.divorcedate, 'DD Mon YYYY'),to_date(i.death, 'DD Mon YYYY'), i.name from families f, individuals i"
+			+" where ((i.id = f.husband_id) or  (i.id=wife_id)) and i.alive='f' and f.divorced='t'";
+	//System.out.println(query);
+	/*try{*/
+	
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next())
+			{	
+				div=rs.getString(1);
+				death=rs.getString(2);
+				INDIName=INDIName+"\n "+rs.getString(3); // Listing all individual's names
+			   
+			} rs.close();
+			
+			if((div=="" || div==null)||(death=="" || death==null)){
+				JOptionPane.showMessageDialog(null,"Either the divorce date OR death date not available!", "Result",JOptionPane.INFORMATION_MESSAGE);
+			}else
+			{
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				divDt = format.parse(div);
+				deathDt = format.parse(death);
+				
+				//System.out.println(divDt);
+				
+				// logic to check whether the divorce date is greater than death date
+				 Calendar divorceDate = Calendar.getInstance();
+				 Calendar deathDate = Calendar.getInstance();
+
+				 divorceDate.setTime(divDt);
+				 deathDate.setTime(deathDt);
+
+				    if (divorceDate.after(deathDate)) {
+				        //throw new IllegalArgumentException("Invalid divorce date!");
+				    	 JOptionPane.showMessageDialog(null,"Individual whose divorce date comes"
+				    			 +"\nafter their death is \n"+INDIName, "Result",JOptionPane.INFORMATION_MESSAGE);
+				    }
+				    else{
+				    	 JOptionPane.showMessageDialog(null,"No Individual has invalid divorce date", "Result",JOptionPane.INFORMATION_MESSAGE);
+				    }
+			}
+			
+/*	}catch(Exception e){
+		JOptionPane.showMessageDialog(null,e,
+				"Individual with an Invalid Divorce date"+INDIName, JOptionPane.ERROR_MESSAGE);//"Invalid divorce date of Individual - "+INDIName
+	}*/
+			    
+}
+
+public static void getINDIAge() throws SQLException{
+	String IndiName="";
+	String IndiAge="";
+	String message="";
+	
+	String query ="select i.name, i.age from individuals i";
+	//System.out.println(query);
+	/*try{*/
+	
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next())
+			{	
+				IndiName=rs.getString(1); // Listing all individual's names
+				IndiAge=rs.getString(2); // Listing thier age
+				message = message+"<tr><td>"+IndiName+"</td><td>"+IndiAge+"</td></tr>";
+			} rs.close();
+			  
+			if(message==null || message==""){
+				JOptionPane.showMessageDialog(null,"No records found!", "Individual's Age",JOptionPane.INFORMATION_MESSAGE);
+			}else
+			{
+				JOptionPane.showMessageDialog(null,"<html><table>" +
+					      "<tr><td>NAME</td><td>AGE</td></tr>" +message+"</table>", "Individual's Age",JOptionPane.INFORMATION_MESSAGE);
+			}
+}
+
 
 public static void main(String[] args) throws IOException, ParseException {
+	
+	String programTitle = "This program performs following\n"
+	+ "1. Parses the gedcom file.\n"
+	+ "2. Stores the parsed data in the database.\n"
+	+ "3. Performs various tasks mentioned in User stories";
+
+	JOptionPane.showMessageDialog(null, programTitle,
+	"Program description", JOptionPane.INFORMATION_MESSAGE);
+	
 	
 	try {
 
@@ -343,6 +454,12 @@ public static void main(String[] args) throws IOException, ParseException {
 		connection.setAutoCommit(false);
 		stmt = connection.createStatement();
 		
+		// Before parsing flushing the table individual and families for a fresh set of data.
+		String query1 ="Delete from Individuals";
+		String query2 ="Delete from Families";
+		stmt.executeUpdate(query1);
+		stmt.executeUpdate(query2);
+	
 	parse();
 
 	String updateHusquery = "UPDATE Families f SET Husband_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Husband_ID)";
@@ -350,23 +467,25 @@ public static void main(String[] args) throws IOException, ParseException {
 	stmt.executeUpdate(updateHusquery);
 	stmt.executeUpdate(updateWifequery);
 	
-		// reference for future puspose
-		/*Displaying the query
-		System.out.print("Individuals");
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Individuals");
-		while (rs.next())
-		{
-			
-		   System.out.println(rs.getString(1));
-		} rs.close();
+	
+	int option = Integer.parseInt(JOptionPane.showInputDialog(null,
+	"Select an option for desired operation.\n1. List age of each individual."
+	+ "\n2. Check for individuals with invalid divorce date.\n", "Select Option",
+	JOptionPane.QUESTION_MESSAGE));
+	
+	switch (option) {
+	// List Each individual's age
+	case 1: 
 		
-		System.out.print("Families");
-		ResultSet rs2 = stmt.executeQuery("SELECT * FROM Families");
-		while (rs2.next())
-		{
-			
-		   System.out.println(rs2.getString(1));
-		} rs2.close();*/
+		getINDIAge();
+		break;
+	
+	// Get individuals with invalid divorce date.
+	case 2: 
+		
+		getDivAfterDeathINDI();
+		break;
+	}
 	
 	stmt.close();
 	connection.commit();
