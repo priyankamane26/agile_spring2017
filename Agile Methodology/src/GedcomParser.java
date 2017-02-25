@@ -485,7 +485,26 @@ public static void main(String[] args) throws IOException, ParseException {
 		
 		getDivAfterDeathINDI();
 		break;
+		
+	case 3: 
+		
+		//US01();
+		break;
+	case 4: 
+		
+		//US02();
+		break;
+	case 5: 
+	
+		//US03();
+		break;
+	case 6: 
+	
+		//US05();
+		break;
 	}
+	
+	
 	
 	stmt.close();
 	connection.commit();
