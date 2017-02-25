@@ -26,7 +26,7 @@
  * 				 User to select from the choices using
  * 				 JoptionPane
  * 02/23/2017	-US27 getINDIAge() method to display 	PM 
- * 				 the individuals with their age		 				 
+ * 				 the individuals with their age		 		
  ************************************************************				  
  */
 
@@ -133,6 +133,8 @@ public static void parse() throws IOException, ParseException, SQLException {
     			else if("FAM".equals(argument)){
     				insertFAMData(id,marr,div,husbID, wifeID, childID);
     				id="";
+    				marr="";
+    				div="";
     				husbID="";
     				wifeID="";
     				childID="";
