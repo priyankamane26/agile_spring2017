@@ -452,36 +452,38 @@ public static void getBirthBeforeMarriage() throws SQLException, ParseException{
 	Date dom=new Date();
 	
 	//fetch all marriage date, birth date and names of all individuals who are married 
-	String query = "select to_date(families.married,'DD Mon YYYY'), to_date(individuals.birthday,'DD Mon YYYY'), individuals.name from families,individuals"
-			+" where families.husband_id=individuals.id OR families.famid=individuals.spouse OR families.wife_id=individuals.id; ";
+	String query = "select to_date(NULLIF(f.married,''),'DD Mon YYYY'), to_date(NULLIF(i.birthday,''),'DD Mon YYYY'), i.name from families f,individuals i"
+			+" where f.husband_id=i.id OR f.famid=i.spouse OR f.wife_id=i.id;";
 
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()){	
 				mdate = rs.getString(1);
 				bdate = rs.getString(2);
-
-				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-				dob = format.parse(bdate);
-				dom = format.parse(mdate);
 				
-				// logic to check whether the birth date is greater than marriage date
-				 Calendar birth = Calendar.getInstance();
-				 Calendar marriage = Calendar.getInstance();
-
-				 birth.setTime(dob);
-				 marriage.setTime(dom);
-				 
-				 //Fetch names of individuals with invalid values
-				 if (birth.after(marriage) && !bdate.contains("0001") && !mdate.contains("0001")) {
-					 countAfter++;
-				 	 nameAfter = nameAfter + "\n " + rs.getString(3);
-				 }
-				 //Fetch names of individuals with missing values
-				 else if(bdate.contains("0001") || mdate.contains("0001")){
+				//Fetch names of individuals with missing values
+				if(bdate == null || mdate == null){
 					 countNull++;
 					 nameNull = nameNull + "\n " + rs.getString(3);
+				}
+				
+				//Fetch names of individuals with invalid values
+				else if (bdate != null && mdate != null) {
+   					 DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				 	 dob = format.parse(bdate);
+				 	 dom = format.parse(mdate);
+				
+				 	 // logic to check whether the birth date is greater than marriage date
+				 	 Calendar birth = Calendar.getInstance();
+				 	 Calendar marriage = Calendar.getInstance();
+
+				 	 birth.setTime(dob);
+				 	 marriage.setTime(dom);
+
+					 if(birth.after(marriage)){
+					 countAfter++;
+				 	 nameAfter = nameAfter + "\n " + rs.getString(3);
+					 }
 				 }
-			
 			} rs.close();
 			
 			// Display the results
@@ -496,14 +498,19 @@ public static void getBirthBeforeMarriage() throws SQLException, ParseException{
 			else{
 			   	 JOptionPane.showMessageDialog(null,"No individual has invalid birth date", "Result",JOptionPane.INFORMATION_MESSAGE);
 			    }	
-
+			
 }
+
 
 public static void getDatesBeforeCurrentDate() throws SQLException, ParseException{
 	String bdate="";
 	String mdate="";
 	String dedate="";
 	String didate="";
+	String nameAfter="";
+	String nameNull="";
+	int countAfter = 0;
+	int countNull = 0;
 	Date dob=new Date();
 	Date dom=new Date();
 	
