@@ -4,13 +4,13 @@
  * 
  * This Program parses the the entire Gedcom file.
  * Gets the data per individual and family.
- * Store it in the Databse.
+ * Store it in the Database.
  * 
  * ************MODIFICATION*********************************
  * Date				Description							Who
  * 
  * 02/11/2017	-logic to implement parsing and 		PM
- * 				 Birthdate, Marriage Dadte, Death
+ * 				 Birth Date, Marriage Date, Death
  * 				 date, Divorce date processing.
  * 02/12/2017	-Created Derived column Age, alive,		PM
  * 				 divorced basis on Birthday,
@@ -27,6 +27,8 @@
  * 				 JoptionPane
  * 02/23/2017	-US27 getINDIAge() method to display 	PM 
  * 				 the individuals with their age		 		
+ * 02/24/2017	-US02 getBirthBeforeMarriage()			AM
+ * 	 
  ************************************************************				  
  */
 
@@ -356,6 +358,7 @@ public static int getAge(Date dateOfBirth) {
     
 }
 
+//-----------------------User Stories by Priyanka Mane----------------------//
 public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 	String div="";
 	String death="";
@@ -378,7 +381,7 @@ public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 			} rs.close();
 			
 			if((div=="" || div==null)||(death=="" || death==null)){
-				JOptionPane.showMessageDialog(null,"Either the divorce date OR death date not available!", "Result",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Either the divorce date OR death date is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);
 			}else
 			{
 				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -400,7 +403,7 @@ public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 				    			 +"\nafter their death is \n"+INDIName, "Result",JOptionPane.INFORMATION_MESSAGE);
 				    }
 				    else{
-				    	 JOptionPane.showMessageDialog(null,"No Individual has invalid divorce date", "Result",JOptionPane.INFORMATION_MESSAGE);
+				    	 JOptionPane.showMessageDialog(null,"No individual has invalid divorce date", "Result",JOptionPane.INFORMATION_MESSAGE);
 				    }
 			}
 			
@@ -437,8 +440,50 @@ public static void getINDIAge() throws SQLException{
 			}
 }
 
-public static void  getBirthBeforeMarriage(){
-	//
+//-----------------------User Stories by Amol Shandilya-----------------------//
+public static void getBirthBeforeMarriage() throws SQLException, ParseException{
+	String bdate="";
+	String mdate="";
+	String name="";
+	Date dob=new Date();
+	Date dom=new Date();
+	
+	//fetch all marriage date, birth date and names of all individuals who are married 
+	String query = "select to_date(families.married,'DD Mon YYYY'), to_date(individuals.birthday,'DD Mon YYYY'), individuals.name from families,individuals"
+			+" where families.husband_id=individuals.id OR families.famid=individuals.spouse OR families.wife_id=individuals.id; ";
+	
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()){	
+				mdate = rs.getString(1);
+				bdate = rs.getString(2);
+				name = name +"\n "+ rs.getString(3);   
+			} rs.close();
+			
+			//check if either of the date is null
+			if((mdate == "" || mdate == null) || (bdate == "" || bdate == null)){
+				JOptionPane.showMessageDialog(null,"Either the marriage date OR birth date is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);
+			}
+			else{
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				dob = format.parse(bdate);
+				dom = format.parse(mdate);
+				
+				// logic to check whether the birth date is greater than marriage date
+				 Calendar birth = Calendar.getInstance();
+				 Calendar marriage = Calendar.getInstance();
+
+				 birth.setTime(dob);
+				 marriage.setTime(dom);
+
+				    if (birth.after(marriage)) {
+				    	 JOptionPane.showMessageDialog(null,"Individual whose birth date comes"
+				    			 +"\nafter their marriage death is \n"+name, "Result",JOptionPane.INFORMATION_MESSAGE);
+				    }
+				    //All dates are are valid
+				    else{
+				    	 JOptionPane.showMessageDialog(null,"No individual has invalid birth date", "Result",JOptionPane.INFORMATION_MESSAGE);
+				    }
+			}
 }
 
 public static void main(String[] args) throws IOException, ParseException {
@@ -475,7 +520,8 @@ public static void main(String[] args) throws IOException, ParseException {
 	
 	int option = Integer.parseInt(JOptionPane.showInputDialog(null,
 	"Select an option for desired operation.\n1. List age of each individual."
-	+ "\n2. Check for individuals with invalid divorce date.\n", "Select Option",
+	+ "\n2. Check for individuals with invalid divorce date"
+	+ "\n3. Check for individuals whose birth date is before marriage date\n", "Select Option",
 	JOptionPane.QUESTION_MESSAGE));
 	
 	switch (option) {
@@ -496,14 +542,17 @@ public static void main(String[] args) throws IOException, ParseException {
 		//US01();
 		getBirthBeforeMarriage();
 		break;
+	
 	case 4: 
 		
 		//US02();
 		break;
+	
 	case 5: 
 	
 		//US03();
 		break;
+	
 	case 6: 
 	
 		//US05();
