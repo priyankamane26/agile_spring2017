@@ -444,21 +444,79 @@ public static void getINDIAge() throws SQLException{
 public static void getBirthBeforeMarriage() throws SQLException, ParseException{
 	String bdate="";
 	String mdate="";
-	String name="";
+	String nameAfter="";
+	String nameNull="";
+	int countAfter = 0;
+	int countNull = 0;
 	Date dob=new Date();
 	Date dom=new Date();
 	
 	//fetch all marriage date, birth date and names of all individuals who are married 
 	String query = "select to_date(families.married,'DD Mon YYYY'), to_date(individuals.birthday,'DD Mon YYYY'), individuals.name from families,individuals"
 			+" where families.husband_id=individuals.id OR families.famid=individuals.spouse OR families.wife_id=individuals.id; ";
-	
+
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()){	
 				mdate = rs.getString(1);
 				bdate = rs.getString(2);
-				name = name +"\n "+ rs.getString(3);   
+
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				dob = format.parse(bdate);
+				dom = format.parse(mdate);
+				
+				// logic to check whether the birth date is greater than marriage date
+				 Calendar birth = Calendar.getInstance();
+				 Calendar marriage = Calendar.getInstance();
+
+				 birth.setTime(dob);
+				 marriage.setTime(dom);
+				 
+				 //Fetch names of individuals with invalid values
+				 if (birth.after(marriage) && !bdate.contains("0001") && !mdate.contains("0001")) {
+					 countAfter++;
+				 	 nameAfter = nameAfter + "\n " + rs.getString(3);
+				 }
+				 //Fetch names of individuals with missing values
+				 else if(bdate.contains("0001") || mdate.contains("0001")){
+					 countNull++;
+					 nameNull = nameNull + "\n " + rs.getString(3);
+				 }
+			
 			} rs.close();
 			
+			// Display the results
+			if(countAfter>0){
+			   	JOptionPane.showMessageDialog(null,"Individual(s) whose birth date comes"
+			   			 +"\nafter their marriage death is \n"+nameAfter, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+			    }
+			else if(countNull>0){
+			   	JOptionPane.showMessageDialog(null,"Individual(s) whose either birth date or marriage date"
+			   			 +"\nis missing are \n"+nameNull, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+			    }
+			else{
+			   	 JOptionPane.showMessageDialog(null,"No individual has invalid birth date", "Result",JOptionPane.INFORMATION_MESSAGE);
+			    }	
+
+}
+
+public static void getDatesBeforeCurrentDate() throws SQLException, ParseException{
+	String bdate="";
+	String mdate="";
+	String dedate="";
+	String didate="";
+	Date dob=new Date();
+	Date dom=new Date();
+	
+	//fetch birth date, marriage date, death date, divorce date and name of all individuals 
+	String query = "select families.married, individuals.birthday, individuals.name from families,individuals"
+			+" where families.husband_id=individuals.id OR families.famid=individuals.spouse OR families.wife_id=individuals.id; ";
+	
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()){	
+				mdate = rs.getString(0);
+				bdate = rs.getString(1);
+				name = name +"\n "+ rs.getString(3);   
+			} rs.close();
 			//check if either of the date is null
 			if((mdate == "" || mdate == null) || (bdate == "" || bdate == null)){
 				JOptionPane.showMessageDialog(null,"Either the marriage date OR birth date is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);
@@ -485,6 +543,10 @@ public static void getBirthBeforeMarriage() throws SQLException, ParseException{
 				    }
 			}
 }
+
+//-----------------------User Stories by Palak Gangwal-----------------------//
+
+//---------------------------------------------------------------------------//
 
 public static void main(String[] args) throws IOException, ParseException {
 	
@@ -525,27 +587,28 @@ public static void main(String[] args) throws IOException, ParseException {
 	JOptionPane.QUESTION_MESSAGE));
 	
 	switch (option) {
-	// List Each individual's age
+	// List each individual's age
 	case 1: 
 		
 		getINDIAge();
 		break;
 	
-	// Get individuals with invalid divorce date.
+	// Get individuals with invalid divorce date
 	case 2: 
 		
 		getDivAfterDeathINDI();
 		break;
-		
+	
+	// Get individuals whose birth date is after marriage date 
 	case 3: 
 		
-		//US01();
 		getBirthBeforeMarriage();
 		break;
 	
+	// Get records whose marriage date, divorce date, birth date and death date is after current date  
 	case 4: 
 		
-		//US02();
+		getDatesBeforeCurrentDate();
 		break;
 	
 	case 5: 
