@@ -435,6 +435,9 @@ public static void getINDIAge() throws SQLException{
 			}
 }
 
+public static void  getBirthBeforeMarriage(){
+	//
+}
 
 public static void main(String[] args) throws IOException, ParseException {
 	
@@ -489,6 +492,7 @@ public static void main(String[] args) throws IOException, ParseException {
 	case 3: 
 		
 		//US01();
+		getBirthBeforeMarriage();
 		break;
 	case 4: 
 		
