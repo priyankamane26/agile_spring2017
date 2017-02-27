@@ -931,8 +931,12 @@ public static void main(String[] args) throws IOException, ParseException {
 	+ "\n6. Check for individuals whose marraige date is after death date", "Select Option",
 	JOptionPane.QUESTION_MESSAGE));
 	
-
-
+	//to create test cases
+	//missing death date, divorce date
+	String updateDeath = "UPDATE individuals SET alive=false where id='I10'";
+	stmt.executeUpdate(updateDeath);
+	String updateDivorced = "UPDATE families SET Divorced=true where famid='F1'";
+	stmt.executeUpdate(updateDivorced);
 	
 	switch (option) {
 	// List each individual's age
