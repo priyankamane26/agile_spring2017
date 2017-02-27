@@ -359,6 +359,7 @@ public static int getAge(Date dateOfBirth) {
     
 }
 
+
 //-----------------------User Stories by Priyanka Mane----------------------//
 public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 	String div="";
@@ -509,9 +510,9 @@ public static void getBirthBeforeMarriage() throws SQLException, ParseException{
 			   	JOptionPane.showMessageDialog(null,"Individual(s) whose either birth date or marriage date"
 			   			 +"\nis MISSING are \n"+nameNull, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
 			    }
-			if(countAfter==0 && countNull==0){
+			if(countAfter==0){
 			   	 JOptionPane.showMessageDialog(null,"No individual has invalid birth date", "Result",JOptionPane.INFORMATION_MESSAGE);
-			    }				
+			   }				
 }
 
 
@@ -520,8 +521,16 @@ public static void getDatesBeforeCurrentDate() throws SQLException, ParseExcepti
 	String dedate="";
 	String mdate="";
 	String didate="";
+	String h_id="";
+	String w_id="";
+	String id="";
+	String alive="";
+	String False="f", True="t"; 
+	String divorce="";
 	String nameBirth="", nameDeath="", nameMar="", nameDiv="" ;
-	int countBirth=0, countDeath = 0, countMar=0, countDiv=0;
+	String nameNullB="", nameNullDe="", nameNullM="", nameNullDi="";
+	int countBirth=0, countDeath=0, countMar=0, countDiv=0;
+	int countNullB=0, countNullDe=0, countNullM=0, countNullDi=0;
 	
 	Date tempD = new Date();
 	Calendar tempC = Calendar.getInstance();
@@ -529,8 +538,9 @@ public static void getDatesBeforeCurrentDate() throws SQLException, ParseExcepti
 	DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 	
 	//fetch birth date, marriage date, death date, divorce date and name of all individuals 
-	String query = "select i.name,to_date(NULLIF(i.birthday,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'),to_date(NULLIF(f.married,''), 'DD Mon YYYY'),to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY')"
-					+ "from families f RIGHT OUTER JOIN individuals i ON ((i.id = f.husband_id) or (i.id=wife_id));";
+	String query = "select i.name,to_date(NULLIF(i.birthday,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'),"
+					+ "to_date(NULLIF(f.married,''), 'DD Mon YYYY'),to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY'),"
+			 		+ "i.alive, f.husband_id, f.wife_id, f.divorced, i.id from families f RIGHT OUTER JOIN individuals i ON ((i.id = f.husband_id) or (i.id=wife_id));";
 	
 	ResultSet rs = stmt.executeQuery(query);
 	while (rs.next()){
@@ -538,7 +548,12 @@ public static void getDatesBeforeCurrentDate() throws SQLException, ParseExcepti
 		dedate = rs.getString(3);
 		mdate = rs.getString(4);
 		didate = rs.getString(5);
-		
+		alive = rs.getString(6);
+		h_id = rs.getString(7);
+		w_id = rs.getString(8);
+		divorce = rs.getString(9);
+		id = rs.getString(10);
+				
 		//Fetch names of individuals with invalid values
 		if (bdate != null) {
 			 tempD = format.parse(bdate);
@@ -548,6 +563,11 @@ public static void getDatesBeforeCurrentDate() throws SQLException, ParseExcepti
 			 	 nameBirth = nameBirth + "\n " + rs.getString(1);
 				 }
 		}
+		else{
+			countNullB++;
+			nameNullB = nameNullB + "\n " + rs.getString(1);
+		}
+			
 		
 		if (dedate != null) {
 			 tempD = format.parse(dedate);
@@ -557,14 +577,26 @@ public static void getDatesBeforeCurrentDate() throws SQLException, ParseExcepti
 			 	 nameDeath = nameDeath + "\n " + rs.getString(1);
 				 }
 		}
+		else{
+			if(equalsWithNulls(alive,False)){
+				countNullDe++;
+				nameNullDe = nameNullDe + "\n " + rs.getString(1);
+			}
+		}
 		
-		if (mdate != null) {
+		if (mdate != null){
 			 tempD = format.parse(mdate);
 		 	 tempC.setTime(tempD);
 		 	 if(tempC.after(today)){
 				 countMar++;
 			 	 nameMar = nameMar + "\n " + rs.getString(1);
 				 }
+		}
+		else{
+			if(equalsWithNulls(h_id,id) || equalsWithNulls(w_id,id)){
+				countNullM++;
+				nameNullM = nameNullM + "\n " + rs.getString(1);
+			}
 		}
 		
 		if (didate != null) {
@@ -575,8 +607,31 @@ public static void getDatesBeforeCurrentDate() throws SQLException, ParseExcepti
 			 	 nameDiv = nameDiv + "\n " + rs.getString(1);
 				 }
 		}
+		else{
+			if(equalsWithNulls(divorce,True)){
+				countNullDi++;
+				nameNullDi = nameNullDi + "\n " + rs.getString(1);
+			}
+		}
 	} rs.close();
 	
+	//Display the names of individuals who have missing values
+	if(countNullB>0){
+	   	JOptionPane.showMessageDialog(null,"Individual(s) whose BIRTH DATE is"
+	   			 +"\nMISSING are \n"+nameNullB, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+	    }
+	if(countNullDe>0){
+	   	JOptionPane.showMessageDialog(null,"Individual(s) whose DEATH DATE is"
+	   			 +"\nMISSING are \n"+nameNullDe, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+	    }
+	if(countNullM>0){
+	   	JOptionPane.showMessageDialog(null,"Individual(s) whose MARRIAGE DATE is"
+	   			 +"\nMISSING are \n"+nameNullM, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+	    }
+	if(countNullDi>0){
+	   	JOptionPane.showMessageDialog(null,"Individual(s) whose DIVORCE DATE is"
+	   			 +"\nMISSING are \n"+nameNullDi, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+	    }
 	// Display the names of individuals who have invalid dates
 	if(countBirth>0){
 	   	JOptionPane.showMessageDialog(null,"Individual(s) whose BIRTH DATE comes"
@@ -599,6 +654,12 @@ public static void getDatesBeforeCurrentDate() throws SQLException, ParseExcepti
 	    }	
 }
 
+//method to compare objects with nullvalues 
+public static final boolean equalsWithNulls(Object a, Object b) {
+    if (a==b) return true;
+    if ((a==null)||(b==null)) return false;
+    return a.equals(b);
+  }
 
 //-----------------------User Stories by Palak Gangwal-----------------------//
 
