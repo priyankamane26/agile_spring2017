@@ -660,12 +660,147 @@ public static final boolean equalsWithNulls(Object a, Object b) {
     if ((a==null)||(b==null)) return false;
     return a.equals(b);
   }
-
 //-----------------------User Stories by Palak Gangwal-----------------------//
 
+
+
+//Userstory 5
+
+	public static void  getMarriageAfterDeath() throws SQLException, ParseException{
+		String mar="";
+		String death="";
+		String INDIName="";
+		String nameNull="";
+		int countAfter = 0;
+		int countNull = 0;
+		Date marDt=new Date();
+		Date deathDt=new Date();
+		
+		String query ="select to_date(NULLIF(f.married,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'), i.name from families f, individuals i"
+				+" where ((i.id = f.husband_id) or  (i.id=wife_id))";
+		//System.out.println(query);
+		
+				ResultSet rs = stmt.executeQuery(query);
+				while (rs.next())
+				{	
+					mar=rs.getString(1);
+					death=rs.getString(2);
+					
+					if(mar=="" || death==null){
+						countNull++;
+						nameNull = nameNull + "\n " + rs.getString(3);
+						
+					}
+					else if(mar!=null && death!=null)
+					{
+						DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+						marDt = format.parse(mar);
+						deathDt = format.parse(death);
+						
+						//System.out.println(divDt);
+						
+						// logic to check whether the marriage date is greater than death date
+						 Calendar marriageDate = Calendar.getInstance();
+						 Calendar deathDate = Calendar.getInstance();
+
+						 marriageDate.setTime(marDt);
+						 deathDate.setTime(deathDt);
+
+						    if (marriageDate.after(deathDate)) {
+						    	countAfter++;
+						        //throw new IllegalArgumentException("Invalid marriage  date!");
+						    	INDIName=INDIName+"\n "+rs.getString(3); // Listing all individual's names	
+						    }
+						    }
+				   
+				} rs.close();
+				
+				// Display the results
+				if(countAfter>0){
+					 	JOptionPane.showMessageDialog(null,"Individual whose marriage  date comes"
+				   			 	+"\nafter their death is \n"+INDIName, "Result",JOptionPane.INFORMATION_MESSAGE);	    	 
+				}
+				if(countNull>0){
+						JOptionPane.showMessageDialog(null,"Either the marriage  date OR death date of Individual(s)\n--------------------"
+								+nameNull+"\n--------------------\n is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+				}
+				if(countAfter==0 || countNull==0){
+						JOptionPane.showMessageDialog(null,"No individual has invalid marriage date", "Result",JOptionPane.INFORMATION_MESSAGE);
+				}	
+		}
+
+	//UStory03()
+
+		public static void getBirthAfterDeath() throws SQLException, ParseException{
+				String birth="";
+				String death="";
+				String INDIName="";
+				String nameNull="";
+				int countAfter = 0;
+				int countNull = 0;
+				Date birthDt=new Date();
+				Date deathDt=new Date();
+				
+				String query ="select to_date(NULLIF( individuals.birthday,''), 'DD Mon YYYY'),to_date(NULLIF( individuals.death,''), 'DD Mon YYYY'), individuals.name from individuals "
+						+"where individuals.alive=false ";
+						
+
+				//System.out.println(query);
+				
+						ResultSet rs = stmt.executeQuery(query);
+						while (rs.next())
+						{	
+							birth=rs.getString(1);
+							death=rs.getString(2);
+							
+							if(birth=="" || death==null){
+								countNull++;
+								nameNull = nameNull + "\n " + rs.getString(3);
+								
+							}
+							else if(birth!=null && death!=null)
+							{
+								DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+								birthDt = format.parse(birth);
+								deathDt = format.parse(death);
+								
+								//System.out.println(divDt);
+								
+								// logic to check whether the marriage date is greater than death date
+								 Calendar birthDate = Calendar.getInstance();
+								 Calendar deathDate = Calendar.getInstance();
+
+								 birthDate.setTime(birthDt);
+								 deathDate.setTime(deathDt);
+
+								    if (birthDate.after(deathDate)) {
+								    	countAfter++;
+								        //throw new IllegalArgumentException("Invalid birth  date!");
+								    	INDIName=INDIName+"\n "+rs.getString(3); // Listing all individual's names	
+								    }
+								    }
+						   
+						} rs.close();
+						
+						// Display the results
+						if(countAfter>0){
+							 	JOptionPane.showMessageDialog(null,"Individual whose birth date comes"
+						   			 	+"\nafter their death is \n"+INDIName, "Result",JOptionPane.INFORMATION_MESSAGE);	    	 
+						}
+						if(countNull>0){
+								JOptionPane.showMessageDialog(null,"Either the birth date OR death date of Individual(s)\n--------------------"
+										+nameNull+"\n--------------------\n is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+						}
+						if(countAfter==0 || countNull==0){
+								JOptionPane.showMessageDialog(null,"No individual has invalid birth date", "Result",JOptionPane.INFORMATION_MESSAGE);
+						}	
+		}
+
+//End of sprint 1 User stories.. 
 //---------------------------------------------------------------------------//
 
-public static void main(String[] args) throws IOException, ParseException {
+
+/*public static void main(String[] args) throws IOException, ParseException {
 	
 	String programTitle = "This program performs following\n"
 	+ "1. Parses the gedcom file.\n"
@@ -754,6 +889,102 @@ public static void main(String[] args) throws IOException, ParseException {
 
 }
 
+}*/
+public static void main(String[] args) throws IOException, ParseException {
+	
+	String programTitle = "This program performs following\n"
+	+ "1. Parses the gedcom file.\n"
+	+ "2. Stores the parsed data in the database.\n"
+	+ "3. Performs various tasks mentioned in User stories";
+
+	JOptionPane.showMessageDialog(null, programTitle,
+	"Program description", JOptionPane.INFORMATION_MESSAGE);
+	
+	
+	try {
+
+		connection = DriverManager.getConnection(
+				"jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
+		connection.setAutoCommit(false);
+		stmt = connection.createStatement();
+		
+		// Before parsing flushing the table individual and families for a fresh set of data.
+		String query1 ="Delete from Individuals";
+		String query2 ="Delete from Families";
+		stmt.executeUpdate(query1);
+		stmt.executeUpdate(query2);
+	
+	parse();
+
+	String updateHusquery = "UPDATE Families f SET Husband_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Husband_ID)";
+	String updateWifequery = "UPDATE Families f SET Wife_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Wife_ID)";
+	stmt.executeUpdate(updateHusquery);
+	stmt.executeUpdate(updateWifequery);
+	
+
+	int option = Integer.parseInt(JOptionPane.showInputDialog(null,
+	"Select an option for desired operation.\n1. List age of each individual."
+	+ "\n2. Check for individuals with invalid divorce date"
+	+ "\n3. Check for individuals whose birth date is before marriage date"
+	+ "\n4. Check for individuals whose birth date, death date, marriage date, or divorce date is after current date"
+	+ "\n5. Check for individuals whose birthdate is after date death "
+	+ "\n6. Check for individuals whose marraige date is after death date", "Select Option",
+	JOptionPane.QUESTION_MESSAGE));
+	
+
+
+	
+	switch (option) {
+	// List each individual's age
+	case 1: 
+		
+		getINDIAge();
+		break;
+	
+	// Get individuals with invalid divorce date
+	case 2: 
+		
+		getDivAfterDeathINDI();
+		break;
+	
+	// Get individuals whose birth date is after marriage date 
+	case 3: 
+		
+		getBirthBeforeMarriage();
+		break;
+	
+	// Get records whose marriage date, divorce date, birth date and death date is after current date  
+	case 4: 
+		
+		getDatesBeforeCurrentDate();
+		break;
+	
+	case 5: 
+		 getBirthAfterDeath();
+		break;
+	
+	case 6: 
+		 getMarriageAfterDeath();
+		//US05();
+		
+		break;
+	}
+	
+	
+	
+	stmt.close();
+	connection.commit();
+	connection.close();
+	
+} catch (SQLException e) {
+
+	System.out.println("Connection Failed! Check output console");
+	e.printStackTrace();
+	return;
+
 }
 
 }
+
+}
+
