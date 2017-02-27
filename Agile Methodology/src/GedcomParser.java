@@ -359,7 +359,6 @@ public static int getAge(Date dateOfBirth) {
     
 }
 
-
 //-----------------------User Stories by Priyanka Mane----------------------//
 public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 	String div="";
@@ -425,6 +424,7 @@ public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 			}	
 			    
 }
+
 
 
 public static void getINDIAge() throws SQLException{
