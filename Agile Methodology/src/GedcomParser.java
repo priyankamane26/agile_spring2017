@@ -366,64 +366,54 @@ public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 	String div="";
 	String death="";
 	String INDIName="";
-	String nameNull="";
-	int countAfter = 0;
-	int countNull = 0;
 	Date divDt=new Date();
 	Date deathDt=new Date();
 	
-	String query ="select to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'), i.name from families f, individuals i"
-			+" where ((i.id = f.husband_id) or  (i.id=wife_id))";
+	String query ="select to_date(f.divorcedate, 'DD Mon YYYY'),to_date(i.death, 'DD Mon YYYY'), i.name from families f, individuals i"
+			+" where ((i.id = f.husband_id) or  (i.id=wife_id)) and i.alive='f' and f.divorced='t'";
 	//System.out.println(query);
+	/*try{*/
 	
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next())
 			{	
 				div=rs.getString(1);
 				death=rs.getString(2);
-				
-				if(div=="" || death==null){
-					countNull++;
-					nameNull = nameNull + "\n " + rs.getString(3);
-					
-				}
-				else if(div!=null && death!=null)
-				{
-					DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-					divDt = format.parse(div);
-					deathDt = format.parse(death);
-					
-					//System.out.println(divDt);
-					
-					// logic to check whether the divorce date is grea2ter than death date
-					 Calendar divorceDate = Calendar.getInstance();
-					 Calendar deathDate = Calendar.getInstance();
-
-					 divorceDate.setTime(divDt);
-					 deathDate.setTime(deathDt);
-
-					    if (divorceDate.after(deathDate)) {
-					    	countAfter++;
-					        //throw new IllegalArgumentException("Invalid divorce date!");
-					    	INDIName=INDIName+"\n "+rs.getString(3); // Listing all individual's names	
-					    }
-					    
-				}
+				INDIName=INDIName+"\n "+rs.getString(3); // Listing all individual's names
 			   
 			} rs.close();
 			
-			// Display the results
-			if(countAfter>0){
-				 	JOptionPane.showMessageDialog(null,"Individual whose divorce date comes"
-			   			 	+"\nafter their death is \n"+INDIName, "Result",JOptionPane.INFORMATION_MESSAGE);	    	 
+			if((div=="" || div==null)||(death=="" || death==null)){
+				JOptionPane.showMessageDialog(null,"Either the divorce date OR death date is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);
+			}else
+			{
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				divDt = format.parse(div);
+				deathDt = format.parse(death);
+				
+				//System.out.println(divDt);
+				
+				// logic to check whether the divorce date is greater than death date
+				 Calendar divorceDate = Calendar.getInstance();
+				 Calendar deathDate = Calendar.getInstance();
+
+				 divorceDate.setTime(divDt);
+				 deathDate.setTime(deathDt);
+
+				    if (divorceDate.after(deathDate)) {
+				        //throw new IllegalArgumentException("Invalid divorce date!");
+				    	 JOptionPane.showMessageDialog(null,"Individual whose divorce date comes"
+				    			 +"\nafter their death is \n"+INDIName, "Result",JOptionPane.INFORMATION_MESSAGE);
+				    }
+				    else{
+				    	 JOptionPane.showMessageDialog(null,"No individual has invalid divorce date", "Result",JOptionPane.INFORMATION_MESSAGE);
+				    }
 			}
-			if(countNull>0){
-					JOptionPane.showMessageDialog(null,"Either the divorce date OR death date of Individual(s)\n--------------------"
-							+nameNull+"\n--------------------\n is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
-			}
-			if(countAfter==0 || countNull==0){
-					JOptionPane.showMessageDialog(null,"No individual has invalid divorce date", "Result",JOptionPane.INFORMATION_MESSAGE);
-			}	
+			
+/*	}catch(Exception e){
+		JOptionPane.showMessageDialog(null,e,
+				"Individual with an Invalid Divorce date"+INDIName, JOptionPane.ERROR_MESSAGE);//"Invalid divorce date of Individual - "+INDIName
+	}*/
 			    
 }
 
