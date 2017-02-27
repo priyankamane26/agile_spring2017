@@ -362,6 +362,7 @@ public static int getAge(Date dateOfBirth) {
 
 
 //-----------------------User Stories by Priyanka Mane----------------------//
+// US-06
 public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 	String div="";
 	String death="";
