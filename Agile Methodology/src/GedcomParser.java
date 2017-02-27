@@ -664,6 +664,72 @@ public static final boolean equalsWithNulls(Object a, Object b) {
   }
 
 //-----------------------User Stories by Palak Gangwal-----------------------//
+public static void getMarriageAfterDeath() throws SQLException, ParseException{
+/*	String ddate="";
+	String mdate="";
+	String nameAfter="";
+	String nameNull="";
+	int countAfter = 0;
+	int countNull = 0;
+	Date dod=new Date();
+	Date dom=new Date();
+	
+	//fetch all marriage date, Death date and names of all individuals who are married 
+	String query = "select to_date(NULLIF(f.married,''),'DD Mon YYYY'), to_date(NULLIF(i.death,''),'DD Mon YYYY'), i.name from families f,individuals i"
+			+" where f.husband_id=i.id OR f.famid=i.spouse OR f.wife_id=i.id;";
+
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()){	
+				mdate = rs.getString(1);
+				ddate = rs.getString(2);
+				
+				//Fetch names of individuals with missing values
+				
+				if(ddate == null || mdate == null){
+					 countNull++;
+					 nameNull = nameNull + "\n " + rs.getString(3);
+				}
+				
+				//Fetch names of individuals with invalid values
+				else if (ddate != null && mdate != null) {
+   					 DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				       
+   					 dod = format.parse(ddate);
+				 	 dom = format.parse(mdate);
+				
+				 	 // logic to check whether the death date is smaller than marriage date
+	
+								 	 
+				 	 
+				 	 
+				 	 Calendar death = Calendar.getInstance();
+				 	 Calendar marriage = Calendar.getInstance();
+
+				 	 death.setTime(dod);
+				 	 marriage.setTime(dom);
+
+					 if(marriage.after(death)){
+					 countAfter++;
+				 	 nameAfter = nameAfter + "\n " + rs.getString(3);
+					 }
+				 }
+			} rs.close();
+			
+			// Display the results
+			
+			if(countAfter==0){
+			   	 JOptionPane.showMessageDialog(null,"No individual has invalid marriage date", "Result",JOptionPane.INFORMATION_MESSAGE);
+			    }	
+			if(countAfter>0){
+			   	JOptionPane.showMessageDialog(null,"Individual(s) whose marraige date comes"
+			   			 +"\nAFTER their death date is \n"+nameAfter, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+			    }
+			if(countNull>0){
+			   	JOptionPane.showMessageDialog(null,"Individual(s) whose either death date or marriage date"
+			   			 +"\nis MISSING are \n"+nameNull, "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
+			    }*/
+						
+}
 
 //---------------------------------------------------------------------------//
 
@@ -733,12 +799,12 @@ public static void main(String[] args) throws IOException, ParseException {
 	
 	case 5: 
 	
-		//US03();
+		//US03()
 		break;
 	
 	case 6: 
 	
-		//US05();
+		getMarriageAfterDeath();
 		break;
 	}
 	
