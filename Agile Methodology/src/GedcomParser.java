@@ -57,6 +57,8 @@ import java.sql.Statement;
 
 
 public class GedcomParser {
+	private static final Object True = null;
+	private static final Object False = null;
 	static Scanner scan;
 	static BufferedWriter outFile;
 	static String name = "";
@@ -438,6 +440,7 @@ public static void getINDIAge() throws SQLException{
 	String IndiName="";
 	String IndiAge="";
 	String message="";
+	int age = 0;
 	
 	String query ="select i.name, i.age from individuals i";
 	//System.out.println(query);
@@ -446,15 +449,25 @@ public static void getINDIAge() throws SQLException{
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next())
 			{	
+				
 				IndiName=rs.getString(1); // Listing all individual's names
 				IndiAge=rs.getString(2); // Listing thier age
-				message = message+"<tr><td>"+IndiName+"</td><td>"+IndiAge+"</td></tr>";
+				age=Integer.parseInt(IndiAge);
+				if(age<0){
+					JOptionPane.showMessageDialog(null,"Error : Age of individual "+IndiName+" is zero", "Individual's Age",JOptionPane.INFORMATION_MESSAGE);
+				}
+				else
+				{
+					message = message+"<tr><td>"+IndiName+"</td><td>"+IndiAge+"</td></tr>";
+				}
+				
 			} rs.close();
 			  
 			if(message==null || message==""){
 				JOptionPane.showMessageDialog(null,"No records found!", "Individual's Age",JOptionPane.INFORMATION_MESSAGE);
 			}else
 			{
+				
 				JOptionPane.showMessageDialog(null,"<html><table>" +
 					      "<tr><td>NAME</td><td>AGE</td></tr>" +message+"</table>", "Individual's Age",JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -677,12 +690,15 @@ public static final boolean equalsWithNulls(Object a, Object b) {
 		String death="";
 		String INDIName="";
 		String nameNull="";
+		String alive="";
+		String isMarried="";
+		String False = "f", True = "t";
 		int countAfter = 0;
 		int countNull = 0;
 		Date marDt=new Date();
 		Date deathDt=new Date();
 		
-		String query ="select to_date(NULLIF(f.married,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'), i.name from families f, individuals i"
+		String query ="select to_date(NULLIF(f.married,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'), i.name, i.alive  from families f, individuals i"
 				+" where ((i.id = f.husband_id) or  (i.id=wife_id))";
 		//System.out.println(query);
 		
@@ -691,12 +707,20 @@ public static final boolean equalsWithNulls(Object a, Object b) {
 				{	
 					mar=rs.getString(1);
 					death=rs.getString(2);
+					alive=rs.getString(4);
 					
-					if(mar=="" || death==null){
+					if(mar=="" || death==null)
+						{
+							isMarried="t";
+						}else
+						{
+							isMarried="f";
+						}
+						
+						if(equalsWithNulls(isMarried,True) && equalsWithNulls(alive,False)){
 						countNull++;
 						nameNull = nameNull + "\n " + rs.getString(3);
-						
-					}
+						}
 					else if(mar!=null && death!=null)
 					{
 						DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -805,97 +829,6 @@ public static final boolean equalsWithNulls(Object a, Object b) {
 //End of sprint 1 User stories.. 
 //---------------------------------------------------------------------------//
 
-
-/*public static void main(String[] args) throws IOException, ParseException {
-	
-	String programTitle = "This program performs following\n"
-	+ "1. Parses the gedcom file.\n"
-	+ "2. Stores the parsed data in the database.\n"
-	+ "3. Performs various tasks mentioned in User stories";
-
-	JOptionPane.showMessageDialog(null, programTitle,
-	"Program description", JOptionPane.INFORMATION_MESSAGE);
-	
-	
-	try {
-
-		connection = DriverManager.getConnection(
-				"jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
-		connection.setAutoCommit(false);
-		stmt = connection.createStatement();
-		
-		// Before parsing flushing the table individual and families for a fresh set of data.
-		String query1 ="Delete from Individuals";
-		String query2 ="Delete from Families";
-		stmt.executeUpdate(query1);
-		stmt.executeUpdate(query2);
-	
-	parse();
-
-	String updateHusquery = "UPDATE Families f SET Husband_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Husband_ID)";
-	String updateWifequery = "UPDATE Families f SET Wife_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Wife_ID)";
-	stmt.executeUpdate(updateHusquery);
-	stmt.executeUpdate(updateWifequery);
-	
-	
-	int option = Integer.parseInt(JOptionPane.showInputDialog(null,
-	"Select an option for desired operation.\n1. List age of each individual."
-	+ "\n2. Check for individuals with invalid divorce date"
-	+ "\n3. Check for individuals whose birth date is before marriage date"
-	+ "\n4. Check for individuals whose birth date, death date, marriage date, or divorce date is after current date\n", "Select Option",
-	JOptionPane.QUESTION_MESSAGE));
-	
-	switch (option) {
-	// List each individual's age
-	case 1: 
-		
-		getINDIAge();
-		break;
-	
-	// Get individuals with invalid divorce date
-	case 2: 
-		
-		getDivAfterDeathINDI();
-		break;
-	
-	// Get individuals whose birth date is after marriage date 
-	case 3: 
-		
-		getBirthBeforeMarriage();
-		break;
-	
-	// Get records whose marriage date, divorce date, birth date and death date is after current date  
-	case 4: 
-		
-		getDatesBeforeCurrentDate();
-		break;
-	
-	case 5: 
-	
-		//US03();
-		break;
-	
-	case 6: 
-	
-		//US05();
-		break;
-	}
-	
-	
-	
-	stmt.close();
-	connection.commit();
-	connection.close();
-	
-} catch (SQLException e) {
-
-	System.out.println("Connection Failed! Check output console");
-	e.printStackTrace();
-	return;
-
-}
-
-}*/
 public static void main(String[] args) throws IOException, ParseException {
 	
 	String programTitle = "This program performs following\n"
