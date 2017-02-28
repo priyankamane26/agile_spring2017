@@ -365,6 +365,9 @@ public static int getAge(Date dateOfBirth) {
 public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 	String div="";
 	String death="";
+	String alive="";
+	String divorced="";
+	String False = "f", True = "t";
 	String INDIName="";
 	String nameNull="";
 	int countAfter = 0;
@@ -372,7 +375,7 @@ public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 	Date divDt=new Date();
 	Date deathDt=new Date();
 	
-	String query ="select to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'), i.name from families f, individuals i"
+	String query ="select to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'), i.name, f.divorced, i.alive from families f, individuals i"
 			+" where ((i.id = f.husband_id) or  (i.id=wife_id))";
 	//System.out.println(query);
 	
@@ -381,11 +384,14 @@ public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 			{	
 				div=rs.getString(1);
 				death=rs.getString(2);
+				divorced=rs.getString(4);
+				alive=rs.getString(5);
 				
-				if(div=="" || death==null){
+				if(div==null || death==null){
+					if(equalsWithNulls(divorced,True) && equalsWithNulls(alive,False)){
 					countNull++;
 					nameNull = nameNull + "\n " + rs.getString(3);
-					
+					}
 				}
 				else if(div!=null && death!=null)
 				{
@@ -421,7 +427,7 @@ public static void getDivAfterDeathINDI() throws SQLException, ParseException{
 					JOptionPane.showMessageDialog(null,"Either the divorce date OR death date of Individual(s)\n--------------------"
 							+nameNull+"\n--------------------\n is not available!", "Result",JOptionPane.INFORMATION_MESSAGE);		    	 
 			}
-			if(countAfter==0 || countNull==0){
+			if(countAfter==0){
 					JOptionPane.showMessageDialog(null,"No individual has invalid divorce date", "Result",JOptionPane.INFORMATION_MESSAGE);
 			}	
 			    
@@ -933,6 +939,8 @@ public static void main(String[] args) throws IOException, ParseException {
 	
 	//to create test cases
 	//missing death date, divorce date
+	String updateDeath2 = "UPDATE individuals SET alive=false where id='I2'";
+	stmt.executeUpdate(updateDeath2);
 	String updateDeath = "UPDATE individuals SET alive=false where id='I10'";
 	stmt.executeUpdate(updateDeath);
 	String updateDivorced = "UPDATE families SET Divorced=true where famid='F1'";
