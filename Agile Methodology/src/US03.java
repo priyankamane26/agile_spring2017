@@ -65,8 +65,6 @@ public class US03 {
 		rs.close();
 
 		if (countAfter == 0) {
-			// JOptionPane.showMessageDialog(null,"No individual has invalid
-			// birth date", "Result",JOptionPane.INFORMATION_MESSAGE);
 			System.out.println(lineSeparator + "No individual has invalid birth date");
 		}
 	}

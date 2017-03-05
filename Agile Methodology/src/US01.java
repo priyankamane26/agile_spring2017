@@ -133,9 +133,6 @@ public class US01 {
 		rs.close();
 
 		if (countBirth == 0 && countDeath == 0 && countMar == 0 && countDiv == 0) {
-			// JOptionPane.showMessageDialog(null,"No individual has invalid
-			// birth date, death date, marriage date, or divorce date",
-			// "Result",JOptionPane.INFORMATION_MESSAGE);
 			System.out.println(
 					lineSeparator + "No individual has invalid birth date, death date, marriage date, or divorce date");
 		}

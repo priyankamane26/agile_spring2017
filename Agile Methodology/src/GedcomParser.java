@@ -70,6 +70,8 @@ public class GedcomParser {
 
 	static Connection con = null;
 	static Statement stmt = null;
+	
+	
 
 	// Parsing the GEDCOM file
 	public static void parse() throws IOException, ParseException, SQLException {
@@ -289,13 +291,6 @@ public class GedcomParser {
 
 		birthDate.setTime(dateOfBirth);
 
-		// Already implemented in User Story 01 getDatesBeforeCurrentDate()//
-		// Code changes after running the test cases - testForInvalidBirthDate
-		/*
-		 * if (birthDate.after(today)) { throw new IllegalArgumentException(
-		 * "Invalid birth date!"); }
-		 */
-
 		age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
 
 		// If birth date is greater than todays date (after 2 days adjustment of
@@ -313,15 +308,6 @@ public class GedcomParser {
 
 		return age;
 
-	}
-
-	// method to compare objects with null values
-	public static final boolean equalsWithNulls(Object a, Object b) {
-		if (a == b)
-			return true;
-		if ((a == null) || (b == null))
-			return false;
-		return a.equals(b);
 	}
 
 	public static void main(String[] args) throws IOException, ParseException, SQLException {
@@ -342,7 +328,7 @@ public class GedcomParser {
 		stmt.executeUpdate(query2);
 
 		parse();
-
+	 
 		US01.getDatesBeforeCurrentDate();
 		US02.getBirthBeforeMarriage();
 		US03.getBirthAfterDeath();
@@ -350,6 +336,8 @@ public class GedcomParser {
 		US06.getINDIAge();
 		US27.getDivAfterDeathINDI();
 		stmt.close();
+		
+		
 	}
 
 }
