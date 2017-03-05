@@ -380,6 +380,7 @@ public class GedcomParser {
 		US06.getINDIAge();
 		US27.getDivAfterDeathINDI();
 		US07.getAgeAbove150();
+		US29.listOfDeseased();
 		stmt.close();
 		
 	}
