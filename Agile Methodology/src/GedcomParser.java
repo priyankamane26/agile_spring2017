@@ -245,20 +245,31 @@ public class GedcomParser {
 	public static void insertINDIData(String name, String id, String surname, String sex, String birth, String death,
 			String famsID, String famcID) throws ParseException, SQLException {
 		int age = 0;
-		if (birth == "" || birth == null) {
-			age = 0;
-		} else {
-			DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
-			Date birthdate = format.parse(birth);
-			age = getAge(birthdate);
-		}
-
+		
 		if (death == null || death == "") {
 			alive = true;
 		} else {
 			alive = false;
 		}
 
+		
+		if (birth == "" || birth == null) {
+			age = 0;
+		} else {
+			
+			DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
+			Date birthdate = format.parse(birth);
+			if(death=="" || death==null){
+				age = getAge(birthdate);
+			}
+			else{
+				Date deathdate = format.parse(death);
+				age = getAge(birthdate,deathdate);
+			}
+			
+		}
+
+		
 		String query = "INSERT INTO Individuals VALUES(" + "'" + id + "'" + ",'" + name + "','" + sex + "','" + birth
 				+ "','" + age + "','" + alive + "','" + death + "','" + famcID + "','" + famsID + "')";
 		// System.out.println(query);
@@ -286,25 +297,58 @@ public class GedcomParser {
 
 		Calendar today = Calendar.getInstance();
 		Calendar birthDate = Calendar.getInstance();
+		
 
 		int age = 0;
 
 		birthDate.setTime(dateOfBirth);
+	
 
-		age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+			age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+			// If birth date is greater than todays date (after 2 days adjustment of
+			// leap year) then decrement age one year
+			if ((birthDate.get(Calendar.DAY_OF_YEAR) - today.get(Calendar.DAY_OF_YEAR) > 3)
+					|| (birthDate.get(Calendar.MONTH) > today.get(Calendar.MONTH))) {
+				age--;
 
-		// If birth date is greater than todays date (after 2 days adjustment of
-		// leap year) then decrement age one year
-		if ((birthDate.get(Calendar.DAY_OF_YEAR) - today.get(Calendar.DAY_OF_YEAR) > 3)
-				|| (birthDate.get(Calendar.MONTH) > today.get(Calendar.MONTH))) {
-			age--;
+				// If birth date and todays date are of same month and birth day of
+				// month is greater than todays day of month then decrement age
+			} else if ((birthDate.get(Calendar.MONTH) == today.get(Calendar.MONTH))
+					&& (birthDate.get(Calendar.DAY_OF_MONTH) > today.get(Calendar.DAY_OF_MONTH))) {
+				age--;
+			}
+	
+		return age;
 
-			// If birth date and todays date are of same month and birth day of
-			// month is greater than todays day of month then decrement age
-		} else if ((birthDate.get(Calendar.MONTH) == today.get(Calendar.MONTH))
-				&& (birthDate.get(Calendar.DAY_OF_MONTH) > today.get(Calendar.DAY_OF_MONTH))) {
-			age--;
-		}
+	}
+	
+	
+	public static int getAge(Date dateOfBirth, Date death) {
+
+		
+		Calendar birthDate = Calendar.getInstance();
+		Calendar deathDate = Calendar.getInstance();
+
+		int age = 0;
+
+		birthDate.setTime(dateOfBirth);
+		deathDate.setTime(death);
+
+	
+			age = deathDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+			
+			// If birth date is greater than todays date (after 2 days adjustment of
+			// leap year) then decrement age one year
+			if ((birthDate.get(Calendar.DAY_OF_YEAR) - deathDate.get(Calendar.DAY_OF_YEAR) > 3)
+					|| (birthDate.get(Calendar.MONTH) > deathDate.get(Calendar.MONTH))) {
+				age--;
+
+				// If birth date and todays date are of same month and birth day of
+				// month is greater than todays day of month then decrement age
+			} else if ((birthDate.get(Calendar.MONTH) == deathDate.get(Calendar.MONTH))
+					&& (birthDate.get(Calendar.DAY_OF_MONTH) > deathDate.get(Calendar.DAY_OF_MONTH))) {
+				age--;
+			}	
 
 		return age;
 
@@ -335,8 +379,8 @@ public class GedcomParser {
 		US05.getMarriageAfterDeath();
 		US06.getINDIAge();
 		US27.getDivAfterDeathINDI();
+		US07.getAgeAbove150();
 		stmt.close();
-		
 		
 	}
 
