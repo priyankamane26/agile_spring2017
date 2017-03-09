@@ -49,11 +49,12 @@ public class US27 {
 			isDivorced = rs.getString(4);
 			alive = rs.getString(5);
 			Spouse=rs.getString(6);
-
-			if ("f".equals(alive) && "f".equals(isDivorced)) {
+			
+			// Commenting as according to requirements only Errors to be shown
+			/*if ("f".equals(alive) && "f".equals(isDivorced)) {
 				System.out.println(lineSeparator + "INFO:\tFAMILY:\tUS27:\t" + "Divorce date of an Individual "
 						+ INDIName +" married to "+Spouse+" is not available to compare against death date:" + death);
-			}
+			}*/
 
 			if ("f".equals(alive) && "t".equals(isDivorced)) {
 				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -81,10 +82,11 @@ public class US27 {
 		}
 		rs.close();
 
-		if (countAfter == 0) {
+		// Commenting as according to requirements only Errors to be shown
+		/*if (countAfter == 0) {
 			System.out
 					.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS27:\t" + "No individual has invalid Divorce date");
-		}
+		}*/
 
 	}
 

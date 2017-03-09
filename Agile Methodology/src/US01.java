@@ -60,7 +60,8 @@ public class US01 {
 			currDate = rs.getString(6);
 			Spouse = rs.getString(7);
 
-			if (bdate == null) {
+			// Commenting as according to requirements only Errors to be shown
+			/*if (bdate == null) {
 				System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS01:\t" + "Birthdate of an Individual "
 						+ INDIName + " is not available to compare against today's date:" + currDate);
 			}
@@ -75,7 +76,7 @@ public class US01 {
 			if (didate == null) {
 				System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS01:\t" + "Divorce date of an Individual "
 						+ INDIName + " is not available to compare against today's date:" + currDate);
-			}
+			}*/
 
 			if (bdate != null) {
 				birDt = format.parse(bdate);

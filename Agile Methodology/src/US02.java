@@ -46,11 +46,12 @@ public class US02 {
 			Spouse = rs.getString(4);
 
 			// Fetch names of individuals with missing values
-			if (bdate == null && mdate != null) {
+			// Commenting as according to requirements only Errors to be shown
+			/*if (bdate == null && mdate != null) {
 				System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS27:\t" + "Birthdate date of an Individual "
 						+ INDIName + " married to " + Spouse + " is not available to compare against Marriage date:"
 						+ mdate);
-			}
+			}*/
 
 			// Fetch names of individuals with invalid values
 			if (bdate != null && mdate != null) {

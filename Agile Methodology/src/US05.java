@@ -42,14 +42,16 @@ public class US05 {
 			death = rs.getString(2);
 			INDIName = rs.getString(3);
 			Spouse = rs.getString(5);
-
-			if (mar == null && death != null) {
+			
+			
+			// Commenting as according to requirements only Errors to be shown
+			/*if (mar == null && death != null) {
 
 				System.out.println(lineSeparator + "INFO:\tFAMILY:\tUS05:\t" + "Marriage date of an Individual "
 						+ INDIName + " with Spouse " + Spouse + " is not available to compare against death date ("
 						+ death+")");
 
-			}
+			}*/
 
 			if (mar != null && death != null) {
 				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
