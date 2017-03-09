@@ -66,6 +66,7 @@ public class GedcomParser {
 
 	// Derived columns
 	static boolean isDivorced = true;
+	static boolean isMarried = true;
 	static boolean alive = false;
 
 	static Connection con = null;
@@ -270,7 +271,7 @@ public class GedcomParser {
 		}
 
 		
-		String query = "INSERT INTO Individuals VALUES(" + "'" + id + "'" + ",'" + name + "','" + sex + "','" + birth
+		String query = "INSERT INTO Individuals VALUES(" + "'" + id + "'" + ",'" + name + "','" + surname + "','" + sex + "','" + birth
 				+ "','" + age + "','" + alive + "','" + death + "','" + famcID + "','" + famsID + "')";
 		// System.out.println(query);
 		stmt.executeUpdate(query);
@@ -285,8 +286,14 @@ public class GedcomParser {
 		} else {
 			isDivorced = true;
 		}
+		
+		if (marr==null || marr==""){
+			isMarried=false;
+		}else {
+			isMarried=true;
+		}
 
-		String query = "INSERT INTO Families VALUES(" + "'" + id + "','" + marr + "','" + isDivorced + "','" + div
+		String query = "INSERT INTO Families VALUES(" + "'" + id + "','" +  isMarried + "','" + marr + "','" + isDivorced + "','" + div
 				+ "','" + husb + "',NULL,'" + wife + "',NULL,'" + child + "')";
 		// System.out.println(query);
 		stmt.executeUpdate(query);
