@@ -12,9 +12,17 @@ public class US29 {
 	public static void listOfDeseased() throws SQLException {
 
 		System.out.println(lineSeparator + "\n****Start of US29****\n");
-
+		
+		System.out.println(lineSeparator +"List of Deceased\n");
+		System.out.format("%-10s%2s%-10s","Individual"," ","Death Date");
+		System.out.println();
+		System.out.format("%-10s%2s%-10s","=========="," ","==========");
+		System.out.println();
+		
 		String IndiName = "";
 		String deathDate = "";
+		
+		boolean noRecords=false;
 
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
@@ -29,13 +37,16 @@ public class US29 {
 			deathDate = rs.getString(2); // Their death dates
 
 			if (IndiName == null || IndiName == "") {
-				System.out.println(lineSeparator + "No records found!");
+				noRecords=true;
 			} else {
-				System.out.println(
-						lineSeparator + "Error\tINDIVIDUAL:\t US07:  Individual " + IndiName + " died on " + deathDate);
+				System.out.format("%-10s%2s%-10s",IndiName," ",deathDate);
+				System.out.println();
 			}
 		}
 		rs.close();
+		if(noRecords){
+			System.out.println(lineSeparator + "No records found!");
+		}
 
 	}
 }
