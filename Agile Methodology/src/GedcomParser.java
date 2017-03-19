@@ -398,6 +398,7 @@ public class GedcomParser {
 		US07.getAgeAbove150();
 		US29.listOfDeseased();
 		US08.birthBeforeParentsMarriage();
+		US14.multipleBirths();
 		stmt.close();
 		
 	}
