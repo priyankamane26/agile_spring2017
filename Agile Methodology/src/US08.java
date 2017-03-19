@@ -35,6 +35,7 @@ public class US08 {
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 	
+		//fetch records of children and corresponding parent details
 		String query = "select i.name, to_date(NULLIF(i.birthday,''), 'DD Mon YYYY'), to_date(NULLIF(f.married,''), 'DD Mon YYYY'),"
 					   +"f.divorced, to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY')"
 					   +"from individuals i, families f where i.child=f.famid";
@@ -49,21 +50,27 @@ public class US08 {
 			isDiv = rs.getString(4);
 			divorce = rs.getString(5);
 			
+			//birth date and marriage date should not be null
 			if(birth != null && marriage != null){
 				bDate = format.parse(birth);
 				birthDate.setTime(bDate);
 			
 				mDate = format.parse(marriage);
 				marriageDate.setTime(mDate);
-			
+				
+				//born before marriage of parents
 				if(birthDate.before(marriageDate))
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS08:\tIndividual " + name + " born before marriage of parents");
 			
+				//if divorced
 				if ("t".equals(isDiv) && divorce != null){
 					divDate = format.parse(divorce);
 					divorceDate.setTime(divDate);
+					//if birth date after divorce date
 					if(birthDate.after(divorceDate)){
-						int months = DatesCalc.getDiff(divDate.toString(), bDate.toString(), DatesCalc.MONTH);
+						//calculate number of months between two dates using getDiff()
+						int months = DatesCalc.getDiff(divDate.toString(), bDate.toString(), DatesCalc.MONTH); //formatted strings as parameters
+						//if birth date more than 9 months after divorce date
 						if(months>9)
 							System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS08:\tIndividual " + name + " born more than 9 months after divorce of parents");
 					}
