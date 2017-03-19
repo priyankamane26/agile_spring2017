@@ -72,6 +72,10 @@ public class GedcomParser {
 	static Connection con = null;
 	static Statement stmt = null;
 	
+	static ArrayList<String> invalidBirthRecords = new ArrayList<>();
+	static ArrayList<String> invalidDeathRecords = new ArrayList<>();
+	static ArrayList<String> invalidMarriageRecords = new ArrayList<>();
+	static ArrayList<String> invalidDivorceRecords = new ArrayList<>();
 	
 
 	// Parsing the GEDCOM file
@@ -379,6 +383,11 @@ public class GedcomParser {
 		stmt.executeUpdate(query2);
 
 		parse();
+		
+		String updateHusquery = "UPDATE Families f SET Husband_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Husband_ID)";
+		String updateWifequery = "UPDATE Families f SET Wife_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Wife_ID)";
+		stmt.executeUpdate(updateHusquery);
+		stmt.executeUpdate(updateWifequery);
 	 
 		US01.getDatesBeforeCurrentDate();
 		US02.getBirthBeforeMarriage();
