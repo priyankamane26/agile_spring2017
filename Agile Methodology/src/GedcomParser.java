@@ -399,6 +399,8 @@ public class GedcomParser {
 		US29.listOfDeseased();
 		US08.birthBeforeParentsMarriage();
 		US14.multipleBirths();
+		US35.RecentBirths();
+		US22.Uniqueids();
 		stmt.close();
 		
 	}
