@@ -421,16 +421,13 @@ public class GedcomParser {
 		stmt.executeUpdate(updateHusquery);
 		stmt.executeUpdate(updateWifequery);
 	 
+		US22.Uniqueids();
 		US01.getDatesBeforeCurrentDate();
 		US08.birthBeforeParentsMarriage();
-		/*US02.getBirthBeforeMarriage();
-		US03.getBirthAfterDeath();
-		US05.getMarriageAfterDeath();
-		//US06.getINDIAge(); now merged with US07 since they are related.
-		US27.getDivAfterDeathINDI();*/
 		US14.multipleBirths();
 		US07.getAgeAbove150();
 		US29.listOfDeseased();
+		US35.RecentBirths();
 		
 		stmt.close();
 		
