@@ -72,12 +72,11 @@ public class GedcomParser {
 	static Connection con = null;
 	static Statement stmt = null;
 	
-	static ArrayList<String> invalidBirthRecords = new ArrayList<>();
-	static ArrayList<String> invalidDeathRecords = new ArrayList<>();
-	static ArrayList<String> invalidMarriageRecords = new ArrayList<>();
-	static ArrayList<String> invalidDivorceRecords = new ArrayList<>();
+	static ArrayList<String> invalidIndividualRecord = new ArrayList<>();
+	static ArrayList<String> invalidFamilyRecord = new ArrayList<>();
+		
 	
-
+	
 	// Parsing the GEDCOM file
 	public static void parse() throws IOException, ParseException, SQLException {
 		
@@ -364,6 +363,39 @@ public class GedcomParser {
 		return age;
 
 	}
+	
+	public static boolean dateValidator(String d1, String d2, String option) throws ParseException{
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		Date firstDt=new Date();
+		Date secondDt=new Date();
+		
+		Calendar firstDate=Calendar.getInstance();
+		Calendar secondDate=Calendar.getInstance();
+		
+		firstDt = format.parse(d1);
+		secondDt= format.parse(d2);
+		
+		firstDate.setTime(firstDt);
+		secondDate.setTime(secondDt);
+		
+		boolean result=false;
+		
+		if("Before".equals(option)){
+			if(firstDate.before(secondDate)){
+				result=true;
+			}else{
+				result=false;
+			}
+		}else if("After".equals(option)){
+			if(firstDate.after(secondDate)){
+				result=true;
+			}else{
+				result=false;
+			}
+		}
+		return result;
+		
+	}
 
 	public static void main(String[] args) throws IOException, ParseException, SQLException {
 		String programTitle = "This program performs following\n" + "1. Parses the gedcom file.\n"
@@ -390,15 +422,16 @@ public class GedcomParser {
 		stmt.executeUpdate(updateWifequery);
 	 
 		US01.getDatesBeforeCurrentDate();
-		US02.getBirthBeforeMarriage();
+		US08.birthBeforeParentsMarriage();
+		/*US02.getBirthBeforeMarriage();
 		US03.getBirthAfterDeath();
 		US05.getMarriageAfterDeath();
 		//US06.getINDIAge(); now merged with US07 since they are related.
-		US27.getDivAfterDeathINDI();
+		US27.getDivAfterDeathINDI();*/
+		US14.multipleBirths();
 		US07.getAgeAbove150();
 		US29.listOfDeseased();
-		US08.birthBeforeParentsMarriage();
-		US14.multipleBirths();
+		
 		stmt.close();
 		
 	}

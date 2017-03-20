@@ -24,20 +24,17 @@ public class US08 {
 		String marriage = "";
 		String isDiv = "";
 		String divorce = "";
+		String indiID="";
+		String invalidINDIRecord="";
+		String invalidFAMRecord="";
 		Date bDate = new Date();
-		Date mDate = new Date();
 		Date divDate = new Date();
-		Calendar birthDate = Calendar.getInstance();
-		Calendar marriageDate = Calendar.getInstance();
-		Calendar divorceDate = Calendar.getInstance();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-		
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 	
 		//fetch records of children and corresponding parent details
 		String query = "select i.name, to_date(NULLIF(i.birthday,''), 'DD Mon YYYY'), to_date(NULLIF(f.married,''), 'DD Mon YYYY'),"
-					   +"f.divorced, to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY')"
+					   +"f.divorced, to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY'), i.id, i.invalidRecord,f.invalidRecord "
 					   +"from individuals i, families f where i.child=f.famid";
 	
 		ResultSet rs = stmt.executeQuery(query);
@@ -49,33 +46,39 @@ public class US08 {
 			marriage = rs.getString(3);
 			isDiv = rs.getString(4);
 			divorce = rs.getString(5);
-			
+			indiID=rs.getString(6);
+			invalidINDIRecord=rs.getString(7);
+			invalidFAMRecord=rs.getString(8);
 			//birth date and marriage date should not be null
-			if(birth != null && marriage != null){
-				bDate = format.parse(birth);
-				birthDate.setTime(bDate);
-			
-				mDate = format.parse(marriage);
-				marriageDate.setTime(mDate);
+			if(birth != null && marriage != null && "N".equals(invalidINDIRecord) && "N".equals(invalidFAMRecord)){
 				
 				//born before marriage of parents
-				if(birthDate.before(marriageDate))
+				if(GedcomParser.dateValidator(birth, marriage, "Before")){
+					GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS08:\tIndividual " + name + " born before marriage of parents");
+				}
+					
 			
 				//if divorced
 				if ("t".equals(isDiv) && divorce != null){
-					divDate = format.parse(divorce);
-					divorceDate.setTime(divDate);
+					
 					//if birth date after divorce date
-					if(birthDate.after(divorceDate)){
+					if(GedcomParser.dateValidator(birth, divorce, "After")){
 						//calculate number of months between two dates using getDiff()
 						int months = DatesCalc.getDiff(divDate.toString(), bDate.toString(), DatesCalc.MONTH); //formatted strings as parameters
 						//if birth date more than 9 months after divorce date
-						if(months>9)
+						if(months>9){
+							GedcomParser.invalidIndividualRecord.add(indiID);
 							System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS08:\tIndividual " + name + " born more than 9 months after divorce of parents");
+						}
+							
 					}
 				}
 			}
+		}
+		for(String indi: GedcomParser.invalidIndividualRecord){
+			String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
+			stmt.executeUpdate(queryDeath);
 		}
 	}
 }

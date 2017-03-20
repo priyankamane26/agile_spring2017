@@ -22,7 +22,7 @@ public class US29 {
 		
 		String IndiName = "";
 		String deathDate = "";
-		String invalidDeath="";
+		String invalidRecord="";
 		
 		
 		boolean noRecords=false;
@@ -30,7 +30,7 @@ public class US29 {
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 
-		String query = "select distinct i.name, i.death, i.invalidDeathRecord  " + " from individuals i " + " where" + " alive=false";
+		String query = "select distinct i.name, i.death, i.invalidRecord  " + " from individuals i " + " where" + " alive=false";
 		// System.out.println(query);
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -38,12 +38,12 @@ public class US29 {
 
 			IndiName = rs.getString(1); // Listing all individual's names
 			deathDate = rs.getString(2); // Their death dates
-			invalidDeath=rs.getString(3);
+			invalidRecord=rs.getString(3);
 
 			if (IndiName == null || IndiName == "") {
 				noRecords=true;
 			} else {
-				if("N".equals(invalidDeath)){
+				if("N".equals(invalidRecord)){
 					System.out.format("%-10s%2s%-10s",IndiName," ",deathDate);
 					System.out.println();
 				}

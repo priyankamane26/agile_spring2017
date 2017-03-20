@@ -20,34 +20,32 @@ public class US01 {
 
 	public static void getDatesBeforeCurrentDate() throws SQLException, ParseException {
 		
-		System.out.println(lineSeparator+"\n****Start of US01****\n");
+		System.out.println(lineSeparator+"\n****Start of US01, US02, US03, US05, US27****\n");
 		
 		String bdate = "";
 		String dedate = "";
 		String mdate = "";
 		String didate = "";
+		String indiID="";
+		String famID="";
 		String INDIName = "";
 		String Spouse = "";
-		Date birDt = new Date();
-		Date deathDt = new Date();
-		Date divDt = new Date();
-		Date marDt = new Date();
 		String famid="";
+		boolean noRecords=false;
 		
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		Date date = new Date();
+		//System.out.println(dateFormat.format(date));
+		String today=dateFormat.format(date);
 		
-
-		int countBirth = 0, countDeath = 0, countMar = 0, countDiv = 0;
-
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-		Calendar today = Calendar.getInstance();
-
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 		// fetch birth date, marriage date, death date, divorce date and name of
 		// all individuals
-		String query = "select i.name,to_date(NULLIF(i.birthday,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'),"
+		String query = "select i.id, f.famid, i.name, to_date(NULLIF(i.birthday,''), 'DD Mon YYYY'),to_date(NULLIF(i.death,''), 'DD Mon YYYY'),"
 				+ "to_date(NULLIF(f.married,''), 'DD Mon YYYY'),to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY'),"
-				+ "f.famid, " + " case "
+				+ " case "
 				+ " when  f.husband_id =i.id then (select i.name from individuals i where i.id=f.wife_id) "
 				+ " when  f.wife_id  =i.id then (select i.name from individuals i where i.id=f.husband_id) " + " end "
 				+ " from families f RIGHT OUTER JOIN individuals i ON ((i.id = f.husband_id) or (i.id=wife_id));";
@@ -55,113 +53,107 @@ public class US01 {
 		//System.out.println(query);
 		ResultSet rs = stmt.executeQuery(query);
 		while (rs.next()) {
-			INDIName = rs.getString(1);
-			bdate = rs.getString(2);
-			dedate = rs.getString(3);
-			mdate = rs.getString(4);
-			didate = rs.getString(5);
-			famid=rs.getString(6);
-			Spouse = rs.getString(7);
+			indiID=rs.getString(1);
+			famid=rs.getString(2);
+			INDIName = rs.getString(3);
+			bdate = rs.getString(4);
+			dedate = rs.getString(5);
+			mdate = rs.getString(6);
+			didate = rs.getString(7);
+			Spouse = rs.getString(8);
 
-			// Commenting as according to requirements only Errors to be shown
-			/*if (bdate == null) {
-				System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS01:\t" + "Birthdate of an Individual "
-						+ INDIName + " is not available to compare against today's date:" + currDate);
+			if (indiID == null) {
+				noRecords = true;
 			}
-			if (dedate == null) {
-				System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS01:\t" + "Death date of an Individual "
-						+ INDIName + " is not available to compare against today's date:" + currDate);
-			}
-			if (mdate == null) {
-				System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS01:\t" + "Marriage date of an Individual "
-						+ INDIName + " is not available to compare against today's date:" + currDate);
-			}
-			if (didate == null) {
-				System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS01:\t" + "Divorce date of an Individual "
-						+ INDIName + " is not available to compare against today's date:" + currDate);
-			}*/
-
+			
 			if (bdate != null) {
-				birDt = format.parse(bdate);
-				Calendar birthDate = Calendar.getInstance();
-				birthDate.setTime(birDt);
 				
-				if (birthDate.after(today)) {
-					countBirth++;
-				GedcomParser.invalidBirthRecords.add(INDIName);	
+				if (GedcomParser.dateValidator(bdate, today, "After")) {
+					GedcomParser.invalidIndividualRecord.add(indiID);	
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS01:\t" + "Birthdate (" + bdate + ") of "
 							+ INDIName + " occurs in the future");
 				}
-
 			}
-
-			if (dedate != null) {
-				deathDt = format.parse(dedate);
-				Calendar deathDate = Calendar.getInstance();
-				deathDate.setTime(deathDt);
+			
+			if(dedate != null){
 				
-				if (deathDate.after(today)) {
-					countDeath++;
-					GedcomParser.invalidDeathRecords.add(INDIName);
+				if (GedcomParser.dateValidator(dedate, today, "After")) {
+					GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS01:\t" + "Death date (" + dedate
 							+ ") of " + INDIName + " occurs in the future");
 				}
-				
-				
 			}
-
-			if (mdate != null) {
-				marDt = format.parse(mdate);
-				Calendar marriageDate = Calendar.getInstance();
-				marriageDate.setTime(marDt);
+			
+			if(mdate != null){
 				
-				if (marriageDate.after(today)) {
-					countMar++;
-					GedcomParser.invalidMarriageRecords.add(famid);
+				if (GedcomParser.dateValidator(mdate, today, "After")) {	
+					GedcomParser.invalidFamilyRecord.add(famid);
 					System.out.println(lineSeparator + "ERROR:\tFAMILY:\tUS01:\t" + "Marriage date (" + mdate
 							+ ") of couple" + INDIName + " and " + Spouse + " occurs in the future");
 				}
-
 			}
-
-			if (didate != null) {
-				divDt = format.parse(didate);
-				Calendar divorceDate = Calendar.getInstance();
-				divorceDate.setTime(divDt);
-				
-				if (divorceDate.after(today)) {
-					countDiv++;
-					GedcomParser.invalidDivorceRecords.add(famid);
+			
+			if(didate != null){
+				if (GedcomParser.dateValidator(didate, today, "After")) {
+					GedcomParser.invalidFamilyRecord.add(famid);
 					System.out.println(lineSeparator + "ERROR:\tFAMILY:\tUS01:\t" + "Divorce date (" + didate + ") of "
 							+ INDIName + " and " + Spouse + " occurs in the future");
 				}
-
 			}
+			
+			if(bdate !=null && mdate != null){
+				if (GedcomParser.dateValidator(bdate, mdate, "After")) {
+					GedcomParser.invalidIndividualRecord.add(indiID);
+					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS02:\t" + INDIName + " was born on ("
+						+ bdate + ") after marriage (" + mdate + ")");
+				}
+			}
+			
+			if(bdate != null && dedate != null){
+				if (GedcomParser.dateValidator(bdate, dedate, "After")) {
+					GedcomParser.invalidIndividualRecord.add(indiID);
+					System.out.println(lineSeparator +"ERROR:\tINDIVIDUAL:\tUS03:\t" + "Individual " + INDIName + " died on (" + dedate
+							+ ") before their birth date (" + bdate+")");
+				}
+			
+			}
+			
+			if(mdate !=null && dedate!=null){
+				if (GedcomParser.dateValidator(mdate, dedate, "After")) {
+					GedcomParser.invalidIndividualRecord.add(indiID);
+					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS05:\t" + INDIName + " got married(" + mdate
+							+ ") after death (" + dedate + ")");
+				}
+			}
+			
+			if(didate != null && dedate != null){
+				if (GedcomParser.dateValidator(didate, dedate, "After")) {
+					GedcomParser.invalidIndividualRecord.add(indiID);
+					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS27:\t" + INDIName + " got divorced("
+							+ didate + ") after death (" + dedate + ")");
+				}
+			}
+			
+			
 
 		}
 		rs.close();
 
-		if (countBirth == 0 && countDeath == 0 && countMar == 0 && countDiv == 0) {
+		if (noRecords) {
 			System.out.println(
 					lineSeparator + "No individual has invalid birth date, death date, marriage date, or divorce date");
 		}
-		for(String indi: GedcomParser.invalidDeathRecords){
-			String queryDeath = "Update Individuals set invalidDeathRecord ='Y' where name='"+indi+"'";
+		
+		// Seting flag for invalid records
+		for(String indi: GedcomParser.invalidIndividualRecord){
+			String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
 			stmt.executeUpdate(queryDeath);
 		}
-		for(String indi: GedcomParser.invalidBirthRecords){
-			String queryBirth = "Update Individuals set invalidBirthRecord  ='Y' where name='"+indi+"'";
+		for(String fam: GedcomParser.invalidFamilyRecord){
+			String queryBirth = "Update Families set invalidRecord  ='Y' where famid='"+fam+"'";
 			stmt.executeUpdate(queryBirth);
 		}
-		for(String fam: GedcomParser.invalidMarriageRecords){
-			String queryMarriage = "Update Families set invalidMarriageRecord  ='Y' where famid='"+fam+"'";
-			stmt.executeUpdate(queryMarriage);
-		}
-		for(String fam: GedcomParser.invalidDivorceRecords){
-			String queryDivorce = "Update Families set invalidDivorceRecord  ='Y' where famid='"+fam+"'";
-			System.out.println(queryDivorce);
-			stmt.executeUpdate(queryDivorce);
-		}
+		
 		
 		
 	}

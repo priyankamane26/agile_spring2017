@@ -18,15 +18,17 @@ public class US07 {
 		String IndiName = "";
 		String IndiAge = "";
 		String isAlive = "";
+		String indiID="";
+		String invalidRecord="";
 		int age = 0;
 		boolean noRecords = false;
 
-		String invalidAgeINDI = "";
+		String validAgeINDI = "";
 
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 
-		String query = "select i.name, i.age, i.alive from individuals i";
+		String query = "select i.name, i.age, i.alive, i.id,i.invalidRecord from individuals i";
 		// System.out.println(query);
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -35,6 +37,8 @@ public class US07 {
 			IndiName = rs.getString(1); // Listing all individual's names
 			IndiAge = rs.getString(2); // Listing thier age
 			isAlive = rs.getString(3);
+			indiID=rs.getString(4);
+			invalidRecord=rs.getString(5);
 			age = Integer.parseInt(IndiAge);
 
 			if (IndiName == null || IndiAge == "") {
@@ -46,15 +50,20 @@ public class US07 {
 						+ age + ") can not be equal to less than zero");
 			} else if (age >= 150) {
 				if ("t".equals(isAlive)) {
+					GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "Error\tINDIVIDUAL:\t US07: Alive Individual " + IndiName
 							+ "'s  age (" + age + ") is above 150 years");
 				} else if ("f".equals(isAlive)) {
+					GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "Error\tINDIVIDUAL:\t US07: Deseased Individual " + IndiName
 							+ "'s  age (" + age + ") is above 150 years");
 				}
 			} else {
 
-				invalidAgeINDI = invalidAgeINDI + IndiName + ": " + IndiAge + "\n";
+				if("N".equals(invalidRecord)){
+					validAgeINDI = validAgeINDI + IndiName + ": " + IndiAge + "\n";
+				}
+				
 			}
 
 		}
@@ -63,8 +72,12 @@ public class US07 {
 		if (noRecords) {
 			System.out.println(lineSeparator + "No records found!");
 		} else {
+			for(String indi: GedcomParser.invalidIndividualRecord){
+				String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
+				stmt.executeUpdate(queryDeath);
+			}
 			System.out.println(lineSeparator + "Individuals with Valid age are\n");
-			System.out.println(invalidAgeINDI);
+			System.out.println(validAgeINDI);
 
 		}
 
