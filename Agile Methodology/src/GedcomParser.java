@@ -80,7 +80,7 @@ public class GedcomParser {
 	// Parsing the GEDCOM file
 	public static void parse() throws IOException, ParseException, SQLException {
 		
-		scan = new Scanner(new FileReader("Sprint1_inputFile.ged"));
+		scan = new Scanner(new FileReader("Sprint2_inputFile.ged"));
 		String reader = "";
 		int count = 0;
 		String name = "";
