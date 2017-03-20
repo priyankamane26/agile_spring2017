@@ -10,7 +10,7 @@ public class US14 {
 	static String lineSeparator = "======================================================================="
 			+ "===========================================================================\n";
 	
-	public static void multipleBirths() throws SQLException, ParseException {
+	public static String multipleBirths() throws SQLException, ParseException {
 		System.out.println(lineSeparator + "\n****Start of US14****\n");
 		
 		int count = 0;
@@ -74,6 +74,7 @@ public class US14 {
 				stmt.executeUpdate(queryDeath);
 			}
 		}
-		
+		return siblings;
 	}
+	
 }

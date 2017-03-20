@@ -11,14 +11,15 @@ public class US22 {
 	static String lineSeparator = "======================================================================="
 			+ "===========================================================================\n";
 
-	public static void Uniqueids() throws SQLException {
+	public static String Uniqueids() throws SQLException {
 		System.out.println(lineSeparator + "\n****Start of US22****\n");
 
 		String ids = "";
 		int count = 0;
 		String type = "";
 		boolean nonUnique = false;
-
+		String nonUniqueIDs="";
+		
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 		String query = "select i.id,count(*),'INDIVIDUAL' as type from Individuals i group by i.id UNION select f.famid,count(*),'FAMILY' as type from Families f group by f.famid;";
@@ -36,9 +37,11 @@ public class US22 {
 			{
 				GedcomParser.invalidIndividualRecord.add(ids);
 				nonUnique = true;
+				nonUniqueIDs=nonUniqueIDs+""+ids;
 				System.out.println(
 						lineSeparator + "ERROR:\tINDIVIDUAL:\tUS22:\tId: " + ids + " is not unique ");
 			} else if (count > 1 && "FAMILY".equals(type)) {
+				nonUniqueIDs=nonUniqueIDs+""+ids;
 				GedcomParser.invalidFamilyRecord.add(ids);
 				nonUnique = true;
 				System.out.println(
@@ -50,15 +53,22 @@ public class US22 {
 		if (!nonUnique) {
 			System.out.println(lineSeparator + "All ids are unique");
 		}else{
+			
 			// Seting flag for invalid records
-			for(String indi: GedcomParser.invalidIndividualRecord){
-				String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
-				stmt.executeUpdate(queryDeath);
+				for(String indi: GedcomParser.invalidIndividualRecord){
+					String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
+					stmt.executeUpdate(queryDeath);
+				}
+		
+				for(String fam: GedcomParser.invalidFamilyRecord){
+					String queryBirth = "Update Families set invalidRecord  ='Y' where famid='"+fam+"'";
+					stmt.executeUpdate(queryBirth);
+				}
+				
+				
 			}
-			for(String fam: GedcomParser.invalidFamilyRecord){
-				String queryBirth = "Update Families set invalidRecord  ='Y' where famid='"+fam+"'";
-				stmt.executeUpdate(queryBirth);
-			}
-		}
-	}
+	
+		return nonUniqueIDs;
+}
+
 }
