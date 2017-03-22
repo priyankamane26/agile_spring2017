@@ -56,9 +56,8 @@ public class US03 {
 
 				if (birthDate.after(deathDate)) {
 					countAfter++;
-					// Commenting as according to requirements only Errors to be shown
-					/*System.out.println(lineSeparator +"INFO:\tINDIVIDUAL:\tUS03:\t" + "Individual " + INDIName + " died on (" + death
-							+ ") before their birth date (" + birth+")");*/
+					System.out.println(lineSeparator +"ERROR:\tINDIVIDUAL:\tUS03:\t" + "Individual " + INDIName + " died on (" + death
+							+ ") before their birth date (" + birth+")");
 				}
 			}
 
