@@ -71,12 +71,6 @@ public class GedcomParser {
 
 	static Connection con = null;
 	static Statement stmt = null;
-	
-	static ArrayList<String> invalidBirthRecords = new ArrayList<>();
-	static ArrayList<String> invalidDeathRecords = new ArrayList<>();
-	static ArrayList<String> invalidMarriageRecords = new ArrayList<>();
-	static ArrayList<String> invalidDivorceRecords = new ArrayList<>();
-	
 
 	// Parsing the GEDCOM file
 	public static void parse(String file) throws IOException, ParseException, SQLException {
@@ -396,10 +390,10 @@ public class GedcomParser {
 		//US06.getINDIAge(); now merged with US07 since they are related.
 		US27.getDivAfterDeathINDI();
 		US07.getAgeAbove150();
-		US29.listOfDeseased();
+		//US29.listOfDeseased();
 		US08.birthBeforeParentsMarriage();
 		US14.multipleBirths();
-		US35.RecentBirths();
+		//US35.RecentBirths();
 		US22.Uniqueids();
 		stmt.close();
 		
