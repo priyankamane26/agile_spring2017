@@ -117,7 +117,7 @@ public class US01 {
 				if (marriageDate.after(today)) {
 					countMar++;
 							System.out.println(lineSeparator + "ERROR:\tFAMILY:\tUS01:\t" + "Marriage date (" + mdate
-							+ ") of couple" + INDIName + " and " + Spouse + " occurs in the future");
+							+ ") of couple " + INDIName + " and " + Spouse + " occurs in the future");
 				}
 
 			}

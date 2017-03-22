@@ -388,13 +388,14 @@ public class GedcomParser {
 		US03.getBirthAfterDeath();
 		US05.getMarriageAfterDeath();
 		//US06.getINDIAge(); now merged with US07 since they are related.
-		US27.getDivAfterDeathINDI();
 		US07.getAgeAbove150();
-		//US29.listOfDeseased();
 		US08.birthBeforeParentsMarriage();
 		US14.multipleBirths();
-		//US35.RecentBirths();
 		US22.Uniqueids();
+		US27.getDivAfterDeathINDI();
+		//US29.listOfDeseased();
+		//US35.RecentBirths();
+		
 		stmt.close();
 		
 	}
