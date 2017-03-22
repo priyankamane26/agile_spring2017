@@ -79,9 +79,9 @@ public class GedcomParser {
 	
 
 	// Parsing the GEDCOM file
-	public static void parse() throws IOException, ParseException, SQLException {
+	public static void parse(String file) throws IOException, ParseException, SQLException {
 		
-		scan = new Scanner(new FileReader("Sprint1_inputFile.ged"));
+		scan = new Scanner(new FileReader(file));
 		String reader = "";
 		int count = 0;
 		String name = "";
@@ -245,6 +245,13 @@ public class GedcomParser {
 			}
 
 		}
+	
+		String updateHusquery = "UPDATE Families f SET Husband_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Husband_ID)";
+		String updateWifequery = "UPDATE Families f SET Wife_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Wife_ID)";
+		stmt.executeUpdate(updateHusquery);
+		stmt.executeUpdate(updateWifequery);
+	 
+	
 	}
 
 	public static void insertINDIData(String name, String id, String surname, String sex, String birth, String death,
@@ -381,15 +388,8 @@ public class GedcomParser {
 
 		stmt.executeUpdate(query1);
 		stmt.executeUpdate(query2);
-
-		parse();
 		
-		String updateHusquery = "UPDATE Families f SET Husband_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Husband_ID)";
-		String updateWifequery = "UPDATE Families f SET Wife_Name=(SELECT NAME FROM Individuals i WHERE i.ID=f.Wife_ID)";
-		stmt.executeUpdate(updateHusquery);
-		stmt.executeUpdate(updateWifequery);
-	 
-		US01.getDatesBeforeCurrentDate();
+		US01.getDatesBeforeCurrentDate("Sprint1_inputFile.ged");
 		US02.getBirthBeforeMarriage();
 		US03.getBirthAfterDeath();
 		US05.getMarriageAfterDeath();
