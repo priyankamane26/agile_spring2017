@@ -383,7 +383,7 @@ public class GedcomParser {
 		stmt.executeUpdate(query1);
 		stmt.executeUpdate(query2);
 		
-		US01.getDatesBeforeCurrentDate("Sprint1_inputFile.ged");
+		US01.getDatesBeforeCurrentDate("Sprint2_inputFile.ged");
 		US02.getBirthBeforeMarriage();
 		US03.getBirthAfterDeath();
 		US05.getMarriageAfterDeath();
