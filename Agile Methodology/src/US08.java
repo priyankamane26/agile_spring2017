@@ -31,6 +31,7 @@ public class US08 {
 		Calendar marriageDate = Calendar.getInstance();
 		Calendar divorceDate = Calendar.getInstance();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		int noRecord = 0;
 		
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
@@ -71,11 +72,15 @@ public class US08 {
 						//calculate number of months between two dates using getDiff()
 						int months = DatesCalc.getDiff(divDate.toString(), bDate.toString(), DatesCalc.MONTH); //formatted strings as parameters
 						//if birth date more than 9 months after divorce date
-						if(months>9)
+						if(months>9){
+							noRecord++;
 							System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS08:\tIndividual " + name + " born more than 9 months after divorce of parents");
+						}
 					}
-				}
+				}	
 			}
 		}
+		if(noRecord == 0)
+			System.out.println(lineSeparator + "No individual has birth date before marriage date of parents");
 	}
 }
