@@ -15,6 +15,7 @@ public class US14 {
 		
 		int count = 0;
 		String birth = "";
+		int noRecord = 0;
 		
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
@@ -31,9 +32,13 @@ public class US14 {
 			//birth date should not be null
 			if(birth!=null){
 				//if more than 5 siblings born at same date
-				if(count>5)
+				if(count>5){
+					noRecord++;
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS14:\tIndividuals born on " + birth + " have more than 5 siblings born at the same time");
+				}	
 			}
 		}
+		if(noRecord == 0)
+			System.out.println("No individual found with more than 5 siblings born at once");
 	}
 }
