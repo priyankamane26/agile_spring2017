@@ -29,7 +29,7 @@ public class US35 {
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 //
-		String query = "select i.name, to_date(NULLIF(i.birthday,''), 'DD Mon YYYY') from individuals i where invalidbirthrecord='N'  ";
+		String query = "select i.name, to_date(NULLIF(i.birthday,''), 'DD Mon YYYY') from individuals i";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
