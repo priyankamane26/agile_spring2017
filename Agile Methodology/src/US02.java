@@ -77,7 +77,7 @@ public class US02 {
 		rs.close();
 
 		if (countAfter == 0) {
-			System.out.println(lineSeparator + "No individual has invalid birth date");
+			System.out.println(lineSeparator + "No individual has birth date before marriage date");
 		}
 	}
 }

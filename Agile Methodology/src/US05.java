@@ -81,7 +81,7 @@ public class US05 {
 		rs.close();
 
 		if (countAfter == 0) {
-			System.out.println(lineSeparator + "No individual has invalid marriage date");
+			System.out.println(lineSeparator + "No individual has marriage date after death date");
 		}
 	}
 }

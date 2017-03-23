@@ -65,7 +65,7 @@ public class US03 {
 		rs.close();
 
 		if (countAfter == 0) {
-			System.out.println(lineSeparator + "No individual has invalid birth date");
+			System.out.println(lineSeparator + "No individual has birth date after death date");
 		}
 	}
 }

@@ -61,7 +61,7 @@ public class US07 {
 		rs.close();
 
 		if (noRecords) {
-			System.out.println(lineSeparator + "No records found!");
+			System.out.println(lineSeparator + "No records found with age above 150!");
 		} else {
 			System.out.println(lineSeparator + "Individuals with Valid age are\n");
 			System.out.println(invalidAgeINDI);
