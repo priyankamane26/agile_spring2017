@@ -39,6 +39,6 @@ public class US14 {
 			}
 		}
 		if(noRecord == 0)
-			System.out.println("No individual found with more than 5 siblings born at once");
+			System.out.println(lineSeparator+"No individual found with more than 5 siblings born at once");
 	}
 }
