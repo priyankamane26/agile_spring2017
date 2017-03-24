@@ -49,7 +49,7 @@ public class US29 {
 		}
 		rs.close();
 		if(noRecords){
-			System.out.println(lineSeparator + "No records found!");
+			System.out.println(lineSeparator + "No records found");
 		}
 
 	}

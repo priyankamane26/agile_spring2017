@@ -34,7 +34,7 @@ public class US14 {
 				//if more than 5 siblings born at same date
 				if(count>5){
 					noRecord++;
-					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS14:\tIndividuals born on " + birth + " have more than 5 siblings born at the same time");
+					System.out.println(lineSeparator + "ERROR:\tFAMILY:\tUS14:\tIndividual born on " + birth + " have more than 5 siblings born at the same time");
 				}	
 			}
 		}

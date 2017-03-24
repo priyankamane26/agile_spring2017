@@ -80,7 +80,7 @@ public class US27 {
 			}
 
 		}
-		if(countAfter>0)
+		if(countAfter==0)
 			System.out.println(lineSeparator+"No individual has divorce date after death date");
 		rs.close();
 	}

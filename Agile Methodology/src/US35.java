@@ -46,11 +46,12 @@ public class US35 {
 		int Recent = DatesCalc.getDiff(bDate.toString() ,todayDate.toString() ,DatesCalc.DAY); 
 	
 		if(Recent< 30)// display individual name is born in lst 30 days
-		System.out.println(lineSeparator  +"Individuals  "+ IndiName + "is born in last 30 days");
+		System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS35:\tIndividual " + IndiName + " born in last 30 days");
 	  
 	}	
-		}
-              // else display no indivauls
-		 System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS27:\t" +"No individual was born in last 30 days");
+}
+		
+         // else display no indivauls
+		// System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS35:\t" +"No individual was born in last 30 days");
 	}	// method to calculate the diffrence in days (recent birth >= 30 days)
 }
