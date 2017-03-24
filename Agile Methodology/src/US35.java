@@ -25,6 +25,7 @@ public class US35 {
 		String birthday = "";
 		
 		int age = 0;
+		int count = 0;
 
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
@@ -45,12 +46,14 @@ public class US35 {
 		bDate = format.parse(birthday);//  parsing to proper format
 		int Recent = DatesCalc.getDiff(bDate.toString() ,todayDate.toString() ,DatesCalc.DAY); 
 	
-		if(Recent< 30)// display individual name is born in lst 30 days
-		System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS35:\tIndividual " + IndiName + " born in last 30 days");
-	  
+		if(Recent< 30){// display individual name is born in lst 30 days
+			count++;
+			System.out.println(lineSeparator + "INFO:\tINDIVIDUAL:\tUS35:\tIndividual " + IndiName + " born in last 30 days");
+		}
 	}	
 }
-		
+if(count == 0)
+	System.out.println(lineSeparator + "No records found");
          // else display no indivauls
 		// System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS35:\t" +"No individual was born in last 30 days");
 	}	// method to calculate the diffrence in days (recent birth >= 30 days)
