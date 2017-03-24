@@ -1,8 +1,8 @@
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 public class US22 {
 
 	static Connection con = null;
@@ -10,28 +10,48 @@ public class US22 {
 	static String lineSeparator = "======================================================================="
 			+ "===========================================================================\n";
 
-	public static void Uniqueids() throws SQLException {
-	System.out.println(lineSeparator + "\n****Start of US22****\n");
+	public static String Uniqueids() throws SQLException {
+		System.out.println(lineSeparator + "\n****Start of US22****\n");
 
-	String ids = " ";
-    String count = "";
-    
-	con = JDBCConnect.getConnection();
-	stmt = con.createStatement();
-	String query = "select i.id,count(*) from Individuals i group by i.id UNION select f.famid,count(*) from Families f group by f.famid;";
-	// System.out.println(query);
-
-	ResultSet rs = stmt.executeQuery(query);
-	while (rs.next()) {
-		 ids = rs.getString(1); // Listing all ids both families and individuals 
-		 count = rs.getString(2); //count of all ids
-		int Count = Integer.parseInt(count);
+		String ids = "";
+		int count = 0;
+		String type = "";
+		boolean nonUnique = false;
+		String nonUniqueIDs="";
 		
-		 if(Count >1) // check if count is more than 1 for ids
-			 System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS27:\t" + " Ids " +  " is not unique "+lineSeparator);
-		// else  
-	} 
-	// display ids as unique
-	 System.out.println(lineSeparator +"All ids are unique");	
-	}	
-	}
+		con = JDBCConnect.getConnection();
+		stmt = con.createStatement();
+		String query = "select i.id,count(*),'INDIVIDUAL' as type from Individuals i group by i.id UNION select f.famid,count(*),'FAMILY' as type from Families f group by f.famid;";
+		// System.out.println(query);
+
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+			ids = rs.getString(1); // Listing all ids both families and
+									// individuals
+			count = Integer.parseInt(rs.getString(2)); // count of all ids
+			type = rs.getString(3);
+
+			if (count > 1 && "INDIVIDUAL".equals(type)) // check if count is
+														// more than 1 for ids
+			{
+				nonUnique = true;
+				nonUniqueIDs=nonUniqueIDs+""+ids;
+				System.out.println(
+						lineSeparator + "ERROR:\tINDIVIDUAL:\tUS22:\tId: " + ids + " is not unique ");
+			} else if (count > 1 && "FAMILY".equals(type)) {
+				nonUniqueIDs=nonUniqueIDs+""+ids;
+				nonUnique = true;
+				System.out.println(
+						lineSeparator + "ERROR:\tFAMILY:\tUS22:\tId: " + ids + " is not unique ");
+			}
+			// else
+		}
+		// display ids as unique
+		if (!nonUnique) {
+			System.out.println(lineSeparator + "All ids are unique");
+		}
+	
+		return nonUniqueIDs;
+}
+
+}
