@@ -387,7 +387,7 @@ public class GedcomParser {
 		US02.getBirthBeforeMarriage();
 		US03.getBirthAfterDeath();
 		US05.getMarriageAfterDeath();
-		//US06.getINDIAge(); now merged with US07 since they are related.
+		US06.getINDIAge();
 		US07.getAgeAbove150();
 		US08.birthBeforeParentsMarriage();
 		US14.multipleBirths();
