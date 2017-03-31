@@ -45,7 +45,7 @@ public class US06 {
 		if (message == null || message == "") {
 			System.out.println(lineSeparator + "No records found!");
 		} else {
-			System.out.println(lineSeparator + "Individuals with Valid age are");
+			System.out.println(lineSeparator + "Individuals with thier age are");
 			System.out.println(message);
 		}
 	}

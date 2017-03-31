@@ -386,7 +386,7 @@ public class GedcomParser {
 		US01.getDatesBeforeCurrentDate("Sprint2_inputFile.ged");
 		US02.getBirthBeforeMarriage();
 		US03.getBirthAfterDeath();
-		US04.getMarriageBeforeDivorce();
+		//US04.getMarriageBeforeDivorce();
 		US05.getMarriageAfterDeath();
 		US06.getINDIAge();
 		US07.getAgeAbove150();
