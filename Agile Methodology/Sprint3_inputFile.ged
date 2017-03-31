@@ -26,7 +26,7 @@
 2 GIVN Sachin
 2 SURN Mane
 2 _MARNM Mane
-1 SEX M
+1 SEX F
 1 BIRT
 2 DATE 31 MAY 1965
 1 DEAT Y
@@ -37,15 +37,15 @@
 2 GIVN Sheela
 2 SURN Mane
 2 _MARNM Mane
-1 SEX F
+1 SEX M
 1 BIRT
 2 DATE 2 FEB 1970
 1 FAMS @F1@
 1 FAMC @F2@
 0 @I4@ INDI
-1 NAME Pratik /Mane/
+1 NAME Pratik /Deshmukh/
 2 GIVN Pratik
-2 SURN Mane
+2 SURN Deshmukh
 2 _MARNM Mane
 1 SEX M
 1 FAMC @F1@
@@ -169,7 +169,7 @@
 2 GIVN Riya
 2 SURN Mane
 2 _MARNM Mane
-1 SEX M
+1 SEX F
 1 BIRT
 2 DATE 12 MAR 1995
 1 FAMS @F5@
