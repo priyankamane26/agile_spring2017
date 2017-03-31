@@ -19,6 +19,8 @@ public class US04 {
 
 		String marriage = "";
 		String divorce = "";
+		String name1 = "";
+		String name2 = "";
 		Date mDate = new Date();
 		Date divDate = new Date();
 		Calendar marriageDate = Calendar.getInstance();
@@ -28,14 +30,19 @@ public class US04 {
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
 
-		String query = " select i.name, to_date(NULLIF(f.married,''), 'DD Mon YYYY'), to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY')" + 
-					   "from families f, individuals i where f.divorced = true and ((i.id = f.husband_id) or (i.id=wife_id));";
+		String query = "select DISTINCT ON (f.famid) famid, i.name, to_date(NULLIF(f.married,''), 'DD Mon YYYY'), to_date(NULLIF(f.divorcedate,''), 'DD Mon YYYY')," 
+						+ "case"
+						+ "when f.husband_id = i.id then (select i.name from individuals i where i.id=f.wife_id)" 
+						+ "when f.wife_id  = i.id then (select i.name from individuals i where i.id = f.husband_id) end" 
+						+ "from families f, individuals i where ((i.id = f.husband_id) or (i.id = wife_id)) and f.divorced = true;";
+
 		// System.out.println(query);
 		
 		ResultSet rs = stmt.executeQuery(query);
 		
 		while(rs.next()){
-			
+			marriage = rs.getString();
+			divorce = rs.getString();
 		}
 		
 	}
