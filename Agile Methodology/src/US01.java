@@ -88,7 +88,7 @@ public class US01 {
 				if (GedcomParser.dateValidator(mdate, today, "After")) {	
 					//GedcomParser.invalidFamilyRecord.add(famid);
 					System.out.println(lineSeparator + "ERROR:\tFAMILY:\tUS01:\t" + "Marriage date (" + mdate
-							+ ") of couple" + INDIName + " and " + Spouse + " occurs in the future");
+							+ ") of couple " + INDIName + " and " + Spouse + " occurs in the future");
 				}
 			}
 			
