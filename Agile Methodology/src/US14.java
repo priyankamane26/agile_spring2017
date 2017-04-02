@@ -61,7 +61,7 @@ public class US14 {
 			if(birth!=null){
 				//if more than 5 siblings born at same date
 				
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					multiBirth=true;
 					siblings=siblings+"\n"+indiName;
 								
@@ -69,10 +69,10 @@ public class US14 {
 		}
 		if(multiBirth){
 			System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS14:\tMore than 5 siblings born on "+birth+" are\n"+siblings);
-			for(String indi: GedcomParser.invalidIndividualRecord){
+			/*for(String indi: GedcomParser.invalidIndividualRecord){
 				String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
 				stmt.executeUpdate(queryDeath);
-			}
+			}*/
 		}
 		return siblings;
 	}

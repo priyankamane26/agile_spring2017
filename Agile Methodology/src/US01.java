@@ -27,7 +27,6 @@ public class US01 {
 		String mdate = "";
 		String didate = "";
 		String indiID="";
-		String famID="";
 		String INDIName = "";
 		String Spouse = "";
 		String famid="";
@@ -69,7 +68,7 @@ public class US01 {
 			if (bdate != null) {
 				
 				if (GedcomParser.dateValidator(bdate, today, "After")) {
-					GedcomParser.invalidIndividualRecord.add(indiID);	
+					//GedcomParser.invalidIndividualRecord.add(indiID);	
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS01:\t" + "Birthdate (" + bdate + ") of "
 							+ INDIName + " occurs in the future");
 				}
@@ -78,7 +77,7 @@ public class US01 {
 			if(dedate != null){
 				
 				if (GedcomParser.dateValidator(dedate, today, "After")) {
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS01:\t" + "Death date (" + dedate
 							+ ") of " + INDIName + " occurs in the future");
 				}
@@ -87,7 +86,7 @@ public class US01 {
 			if(mdate != null){
 				
 				if (GedcomParser.dateValidator(mdate, today, "After")) {	
-					GedcomParser.invalidFamilyRecord.add(famid);
+					//GedcomParser.invalidFamilyRecord.add(famid);
 					System.out.println(lineSeparator + "ERROR:\tFAMILY:\tUS01:\t" + "Marriage date (" + mdate
 							+ ") of couple" + INDIName + " and " + Spouse + " occurs in the future");
 				}
@@ -95,7 +94,7 @@ public class US01 {
 			
 			if(didate != null){
 				if (GedcomParser.dateValidator(didate, today, "After")) {
-					GedcomParser.invalidFamilyRecord.add(famid);
+					//GedcomParser.invalidFamilyRecord.add(famid);
 					System.out.println(lineSeparator + "ERROR:\tFAMILY:\tUS01:\t" + "Divorce date (" + didate + ") of "
 							+ INDIName + " and " + Spouse + " occurs in the future");
 				}
@@ -103,7 +102,7 @@ public class US01 {
 			
 			if(bdate !=null && mdate != null){
 				if (GedcomParser.dateValidator(bdate, mdate, "After")) {
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS02:\t" + INDIName + " was born on ("
 						+ bdate + ") after marriage (" + mdate + ")");
 				}
@@ -111,7 +110,7 @@ public class US01 {
 			
 			if(bdate != null && dedate != null){
 				if (GedcomParser.dateValidator(bdate, dedate, "After")) {
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator +"ERROR:\tINDIVIDUAL:\tUS03:\t" + "Individual " + INDIName + " died on (" + dedate
 							+ ") before their birth date (" + bdate+")");
 				}
@@ -120,7 +119,7 @@ public class US01 {
 			
 			if(mdate !=null && dedate!=null){
 				if (GedcomParser.dateValidator(mdate, dedate, "After")) {
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS05:\t" + INDIName + " got married(" + mdate
 							+ ") after death (" + dedate + ")");
 				}
@@ -128,7 +127,7 @@ public class US01 {
 			
 			if(didate != null && dedate != null){
 				if (GedcomParser.dateValidator(didate, dedate, "After")) {
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS27:\t" + INDIName + " got divorced("
 							+ didate + ") after death (" + dedate + ")");
 				}
@@ -145,7 +144,7 @@ public class US01 {
 		}
 		
 		// Seting flag for invalid records
-		for(String indi: GedcomParser.invalidIndividualRecord){
+		/*for(String indi: GedcomParser.invalidIndividualRecord){
 			String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
 			stmt.executeUpdate(queryDeath);
 		}
@@ -153,7 +152,7 @@ public class US01 {
 			String queryBirth = "Update Families set invalidRecord  ='Y' where famid='"+fam+"'";
 			stmt.executeUpdate(queryBirth);
 		}
-		
+		*/
 		
 		
 	}

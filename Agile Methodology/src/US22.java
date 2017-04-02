@@ -35,14 +35,14 @@ public class US22 {
 			if (count > 1 && "INDIVIDUAL".equals(type)) // check if count is
 														// more than 1 for ids
 			{
-				GedcomParser.invalidIndividualRecord.add(ids);
+				//GedcomParser.invalidIndividualRecord.add(ids);
 				nonUnique = true;
 				nonUniqueIDs=nonUniqueIDs+""+ids;
 				System.out.println(
 						lineSeparator + "ERROR:\tINDIVIDUAL:\tUS22:\tId: " + ids + " is not unique ");
 			} else if (count > 1 && "FAMILY".equals(type)) {
 				nonUniqueIDs=nonUniqueIDs+""+ids;
-				GedcomParser.invalidFamilyRecord.add(ids);
+				//GedcomParser.invalidFamilyRecord.add(ids);
 				nonUnique = true;
 				System.out.println(
 						lineSeparator + "ERROR:\tFAMILY:\tUS22:\tId: " + ids + " is not unique ");
@@ -55,7 +55,7 @@ public class US22 {
 		}else{
 			
 			// Seting flag for invalid records
-				for(String indi: GedcomParser.invalidIndividualRecord){
+			/*	for(String indi: GedcomParser.invalidIndividualRecord){
 					String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
 					stmt.executeUpdate(queryDeath);
 				}
@@ -63,7 +63,7 @@ public class US22 {
 				for(String fam: GedcomParser.invalidFamilyRecord){
 					String queryBirth = "Update Families set invalidRecord  ='Y' where famid='"+fam+"'";
 					stmt.executeUpdate(queryBirth);
-				}
+				}*/
 				
 				
 			}

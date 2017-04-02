@@ -54,7 +54,7 @@ public class US08 {
 				
 				//born before marriage of parents
 				if(GedcomParser.dateValidator(birth, marriage, "Before")){
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS08:\tIndividual " + name + " born before marriage of parents");
 				}
 					
@@ -68,7 +68,7 @@ public class US08 {
 						int months = DatesCalc.getDiff(divDate.toString(), bDate.toString(), DatesCalc.MONTH); //formatted strings as parameters
 						//if birth date more than 9 months after divorce date
 						if(months>9){
-							GedcomParser.invalidIndividualRecord.add(indiID);
+							//GedcomParser.invalidIndividualRecord.add(indiID);
 							System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS08:\tIndividual " + name + " born more than 9 months after divorce of parents");
 						}
 							
@@ -76,9 +76,9 @@ public class US08 {
 				}
 			}
 		}
-		for(String indi: GedcomParser.invalidIndividualRecord){
+		/*for(String indi: GedcomParser.invalidIndividualRecord){
 			String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
 			stmt.executeUpdate(queryDeath);
-		}
+		}*/
 	}
 }

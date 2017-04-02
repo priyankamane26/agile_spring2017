@@ -50,11 +50,11 @@ public class US07 {
 						+ age + ") can not be equal to less than zero");
 			} else if (age >= 150) {
 				if ("t".equals(isAlive)) {
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "Error\tINDIVIDUAL:\t US07: Alive Individual " + IndiName
 							+ "'s  age (" + age + ") is above 150 years");
 				} else if ("f".equals(isAlive)) {
-					GedcomParser.invalidIndividualRecord.add(indiID);
+					//GedcomParser.invalidIndividualRecord.add(indiID);
 					System.out.println(lineSeparator + "Error\tINDIVIDUAL:\t US07: Deseased Individual " + IndiName
 							+ "'s  age (" + age + ") is above 150 years");
 				}
@@ -72,10 +72,10 @@ public class US07 {
 		if (noRecords) {
 			System.out.println(lineSeparator + "No records found!");
 		} else {
-			for(String indi: GedcomParser.invalidIndividualRecord){
+			/*for(String indi: GedcomParser.invalidIndividualRecord){
 				String queryDeath = "Update Individuals set invalidRecord ='Y' where id='"+indi+"'";
 				stmt.executeUpdate(queryDeath);
-			}
+			}*/
 			System.out.println(lineSeparator + "Individuals with Valid age are\n");
 			System.out.println(validAgeINDI);
 

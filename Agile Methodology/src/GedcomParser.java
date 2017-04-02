@@ -72,15 +72,15 @@ public class GedcomParser {
 	static Connection con = null;
 	static Statement stmt = null;
 	
-	static ArrayList<String> invalidIndividualRecord = new ArrayList<>();
-	static ArrayList<String> invalidFamilyRecord = new ArrayList<>();
+	/*static ArrayList<String> invalidIndividualRecord = new ArrayList<>();
+	static ArrayList<String> invalidFamilyRecord = new ArrayList<>();*/
 		
 	
 	
 	// Parsing the GEDCOM file
 	public static void parse() throws IOException, ParseException, SQLException {
 		
-		scan = new Scanner(new FileReader("Sprint2_inputFile.ged"));
+		scan = new Scanner(new FileReader("Sprint3_inputFile.ged"));
 		String reader = "";
 		int count = 0;
 		String name = "";
@@ -422,12 +422,18 @@ public class GedcomParser {
 		stmt.executeUpdate(updateWifequery);
 	 
 		US22.Uniqueids();
-		US01.getDatesBeforeCurrentDate();
+		US01.getDatesBeforeCurrentDate();	// US01,02,03,05,27
 		US08.birthBeforeParentsMarriage();
 		US14.multipleBirths();
-		US07.getAgeAbove150();
+		US07.getAgeAbove150(); //US 06 and 07
 		US29.listOfDeseased();
 		US35.RecentBirths();
+		
+		//Sprint 3 User Stories
+		US16.sameFamilySurname();
+		US21.correctGenderForRole();
+		US04.getMarriageBeforeDivorce();
+		US18.getMarriedSiblings();
 		
 		stmt.close();
 		
