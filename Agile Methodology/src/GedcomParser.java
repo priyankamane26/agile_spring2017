@@ -392,12 +392,13 @@ public class GedcomParser {
 		US07.getAgeAbove150();
 		US08.birthBeforeParentsMarriage();
 		US14.multipleBirths();
+		US16.sameFamilySurname();
+		US18.getMarriedSiblings();
+		US21.correctGenderForRole();
 		US22.Uniqueids();
 		US27.getDivAfterDeathINDI();
 		US29.listOfDeseased();
 		US35.RecentBirths();
-		US16.sameFamilySurname();
-		US21.correctGenderForRole();
 		
 		stmt.close();
 		
