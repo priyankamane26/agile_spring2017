@@ -399,7 +399,8 @@ public class GedcomParser {
 		US27.getDivAfterDeathINDI();
 		US29.listOfDeseased();
 		US35.RecentBirths();
-		
+		US38.UpcommingBirthdays();
+		US10.Marriageafter14();
 		stmt.close();
 		
 	}
