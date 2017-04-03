@@ -80,7 +80,7 @@ public class GedcomParser {
 	// Parsing the GEDCOM file
 	public static void parse() throws IOException, ParseException, SQLException {
 		
-		scan = new Scanner(new FileReader("Sprint3_inputFile.ged"));
+		scan = new Scanner(new FileReader("Sprint4_inputFile.ged"));
 		String reader = "";
 		int count = 0;
 		String name = "";
@@ -436,6 +436,9 @@ public class GedcomParser {
 		US18.getMarriedSiblings();
 		US10.Marriageafter14();
 		US38.UpcommingBirthdays();
+		
+		//Sprint 4 User Stories
+		US28.siblingAgeDesc();
 		
 		stmt.close();
 		
