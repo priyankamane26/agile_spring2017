@@ -434,6 +434,8 @@ public class GedcomParser {
 		US21.correctGenderForRole();
 		US04.getMarriageBeforeDivorce();
 		US18.getMarriedSiblings();
+		US10.Marriageafter14();
+		US38.UpcommingBirthdays();
 		
 		stmt.close();
 		
