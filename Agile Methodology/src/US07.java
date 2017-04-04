@@ -13,7 +13,7 @@ public class US07 {
 
 	public static void getAgeAbove150() throws SQLException {
 
-		System.out.println(lineSeparator + "\n****Start of US06 and US07****\n");
+		System.out.println(lineSeparator + "\n****Start of US27 and US07****\n");
 
 		String IndiName = "";
 		String IndiAge = "";
@@ -46,7 +46,7 @@ public class US07 {
 			}
 
 			if (age <= 0) {
-				System.out.println(lineSeparator + "Error\tINDIVIDUAL:\t US06: Individual " + IndiName + "'s  age ("
+				System.out.println(lineSeparator + "Error\tINDIVIDUAL:\t US27: Individual " + IndiName + "'s  age ("
 						+ age + ") can not be equal to less than zero");
 			} else if (age >= 150) {
 				if ("t".equals(isAlive)) {

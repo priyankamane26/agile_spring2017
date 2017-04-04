@@ -20,7 +20,7 @@ public class US01 {
 
 	public static void getDatesBeforeCurrentDate() throws SQLException, ParseException {
 		
-		System.out.println(lineSeparator+"\n****Start of US01, US02, US03, US05, US27****\n");
+		System.out.println(lineSeparator+"\n****Start of US01, US02, US03, US05, US06****\n");
 		
 		String bdate = "";
 		String dedate = "";
@@ -128,7 +128,7 @@ public class US01 {
 			if(didate != null && dedate != null){
 				if (GedcomParser.dateValidator(didate, dedate, "After")) {
 					//GedcomParser.invalidIndividualRecord.add(indiID);
-					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS27:\t" + INDIName + " got divorced("
+					System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS06:\t" + INDIName + " got divorced("
 							+ didate + ") after death (" + dedate + ")");
 				}
 			}
