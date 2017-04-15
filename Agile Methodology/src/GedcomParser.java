@@ -440,6 +440,7 @@ public class GedcomParser {
 		//Sprint 4 User Stories
 		US28.siblingAgeDesc();
 		US36.listOfDeseased();
+		US39.UpcomingAnniversaries();
 		
 		stmt.close();
 		
