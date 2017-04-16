@@ -441,6 +441,7 @@ public class GedcomParser {
 		US28.siblingAgeDesc();
 		US36.listOfDeseased();
 		US39.UpcomingAnniversaries();
+		US34.ListAgeDifferences();
 		
 		stmt.close();
 		
