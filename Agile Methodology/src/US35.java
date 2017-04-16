@@ -11,47 +11,59 @@ import java.util.Date;
 import java.util.Locale;
 
 public class US35 {
-	
+
 	static Connection con = null;
 	static Statement stmt = null;
 	static String lineSeparator = "======================================================================="
 			+ "============================================================================\n";
-	
+
+	@SuppressWarnings("deprecation")
 	public static void RecentBirths() throws SQLException, ParseException {
 
 		System.out.println(lineSeparator + "\n****Start of US35****\n");
 
+		System.out.println(lineSeparator + "List of Individuals who's birthday's were in Last 30 days\n");
+
+		System.out.format("%-10s%2s%-10s", "Individual", " ", "Birth Date");
+		System.out.println();
+		System.out.format("%-10s%2s%-10s", "==========", " ", "==========");
+		System.out.println();
+
 		String IndiName = "";
 		String birthday = "";
-		
-		int age = 0;
+		String todaysDate = java.time.LocalDate.now().toString();
+		Date todayDate = new Date();
+		Date bDate = new Date();
+		int dateDiff=0;
 
 		con = JDBCConnect.getConnection();
 		stmt = con.createStatement();
-//
-		String query = "select i.name, to_date(NULLIF(i.birthday,''), 'DD Mon YYYY') from individuals i where invalidRecord='N'  ";
-		
+		//
+		String query = "select i.name, to_date(NULLIF(i.birthday,''), 'DD Mon YYYY') from individuals i";
+		//System.out.println(query);
 		ResultSet rs = stmt.executeQuery(query);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		while (rs.next()) {
-		IndiName = rs.getString(1); // Listing all individual's names
-		birthday = rs.getString(2);// birthday
-		String todaysDate =  java.time.LocalDate.now().toString();
-		if(birthday!=null){
-		Date todayDate  = new Date();
-		todayDate = format.parse(todaysDate); //  parsing to proper format
+
+			IndiName = rs.getString(1); // Listing all individual's names
+			birthday = rs.getString(2);// birthday
+			
 		
-		Date bDate  = new Date();
-		bDate = format.parse(birthday);//  parsing to proper format
-		int Recent = DatesCalc.getDiff(bDate.toString() ,todayDate.toString() ,DatesCalc.DAY); 
-	
-		if(Recent< 30)// display individual name is born in lst 30 days
-		System.out.println(lineSeparator  +"Individuals  "+ IndiName + "'s  birthday was in last 30 days");
-	  
-	}	
-}
-		
-         // else display no indivauls
-		// System.out.println(lineSeparator + "ERROR:\tINDIVIDUAL:\tUS35:\t" +"No individual was born in last 30 days");
-	}	// method to calculate the diffrence in days (recent birth >= 30 days)
+			if (birthday != null) {
+				
+				todayDate = format.parse(todaysDate); // parsing to proper format
+				bDate = format.parse(birthday);// parsing to proper format
+				
+				dateDiff=(todayDate.getDate()-bDate.getDate());
+				
+					if(todayDate.getMonth()==bDate.getMonth() && dateDiff<=30 && dateDiff > 0){
+						System.out.format("%-10s%2s%-10s", IndiName, " ", birthday);
+						System.out.println();
+					}
+				
+
+			}
+		}
+
+	} // method to calculate the diffrence in days (recent birth >= 30 days)
 }
