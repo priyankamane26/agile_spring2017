@@ -442,6 +442,8 @@ public class GedcomParser {
 		US36.listOfDeseased();
 		US39.UpcomingAnniversaries();
 		US34.ListAgeDifferences();
+		US30.listLivingMarried();
+		US31.listLivingSingle();
 		
 		stmt.close();
 		
